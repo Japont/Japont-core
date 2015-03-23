@@ -37,7 +37,7 @@ def fontcss():
         font_filepath = os.path.abspath(font_filepath)
         
         # export_filename
-        tmp_dir = os.path.join(os.path.dirname(__file__), 'tmp')
+        tmp_dir = '/tmp'
         unixtime = int(time.time())
         random_str = "".join([
             random.choice("1234567890ABCDEF") for x in xrange(10)
