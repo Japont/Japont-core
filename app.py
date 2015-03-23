@@ -64,7 +64,7 @@ def fontcss():
         script += "Quit(0)\n"
         
         fontforge = Popen(
-            "/usr/bin/fontforge -lang=ff -script",
+            "fontforge -lang=ff -script",
             shell=True, stdin=PIPE)
         fontforge.stdin.write(script)
         fontforge.stdin.close()
