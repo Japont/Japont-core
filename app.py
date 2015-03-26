@@ -1,16 +1,24 @@
 #! python
 # coding: utf-8
 
-import os, sys, time, random, json, base64
+import os, re, sys, time, random, json, base64
+from os import path
+from os.path import relpath
+from glob import glob
 from subprocess import Popen, PIPE
 from flask import (
-  Flask, request, render_template, Response, logging, make_response)
+  Flask, request, render_template, Response, jsonify, make_response)
 
 app = Flask(__name__)
+app.debug = True
 
 @app.route('/')
 def index():
     return u'テスト'
+
+@app.route('/fontlist.json')
+def fontlist():
+    return jsonify(**app.config['font_list'])
 
 @app.route('/font.css', methods=['POST'])
 def fontcss():
@@ -91,7 +99,16 @@ def fontcss():
     
     return response
 
+def load_font_list():
+    font_dirs = os.listdir(path.join(path.dirname(__file__), 'fonts'))
+    font_list = {}
+    for dirname in font_dirs:
+        dirpath = path.join(path.dirname(__file__), 'fonts', dirname)
+        font_list[dirname] = [relpath(x, dirpath) for x in glob(path.join(dirpath, '*')) if re.search(r"\.(ttf|otf)$", x)]
+    return font_list
+
 if __name__ == '__main__':
+    app.config['font_list'] = load_font_list()
+    
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
-

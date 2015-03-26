@@ -1,0 +1,20 @@
+/*
+{{export_name}}
+Copyright [{{year}}] {{owner}}
+
+このフォントは，Apache License Version 2.0に基づいてライセンスされます．
+詳しくは以下の英文を参照してください．
+=========================================================
+
+{{export_name}}
+Copyright [{{year}}] {{owner}}
+
+This font licensed under the Apache License, Version 2.0.
+
+This font was created by modifying {{font_name}}.
+Modification: Subsetting.
+---------------------------------------------------------
+
+{{license}}
+
+*/
