@@ -1,10 +1,11 @@
 /*
 {{export_name}}
-Copyright [{{year}}] {{owner}}
+Copyright {{year}} {{owner.decode('utf-8')}}
 
-This font was created by modifying {{font_name}}.
+This font was created by modifying "{{font_name}}".
 ---------------------------------------------------------
+** License of original font **
 
-{{license}}
+{{license.decode('utf-8')}}
 
 */
