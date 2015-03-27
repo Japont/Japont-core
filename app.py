@@ -8,7 +8,7 @@ from glob import glob
 from datetime import datetime
 from subprocess import Popen, PIPE
 from flask import (
-  Flask, request, render_template, Response, jsonify, make_response, current_app)
+  Flask, request, render_template, Response, jsonify, make_response)
 
 app = Flask(__name__)
 app.debug = True
@@ -19,7 +19,7 @@ def index():
 
 @app.route('/fontlist.json')
 def fontlist():
-    return jsonify(**current_app.config['font_list'])
+    return jsonify(**app.config['font_list'])
 
 @app.route('/font.css', methods=['POST'])
 def fontcss():
@@ -40,7 +40,7 @@ def fontcss():
             raise ValueError()
         
         # font_filename
-        font_dir = path.join(current_app.config['root_dir'], 'fonts')
+        font_dir = path.join(app.config['root_dir'], 'fonts')
         font_filename = json_data['fontName']
         font_filepath = path.join(font_dir, font_filename)
         font_filepath = abspath(font_filepath)
@@ -143,7 +143,7 @@ def fontcss():
             export_name=export_basename,
             font_name=font_familyname,
             year=datetime.today().year,
-            owner=current_app.config['owner'],
+            owner=app.config['owner'],
             font_url=font_origin_url,
             text=json_data['text'])
       
@@ -178,10 +178,11 @@ def load_font_list():
         font_list[dirname].sort()
     return font_list
 
+# config
+app.config['owner'] = u'3846masa'
+app.config['root_dir'] = dirname(__file__)
+app.config['font_list'] = load_font_list()
+
 if __name__ == '__main__':
-    app.config['owner'] = u'3846masa'
-    app.config['root_dir'] = dirname(__file__)
-    app.config['font_list'] = load_font_list()
-    
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
