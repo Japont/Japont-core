@@ -1,7 +1,7 @@
 /*
 
 {{export_name}}
-Copyright {{year}} {{owner}}
+Copyright {{year}} {{owner.decode('utf-8')}}
 
 This font is licensed under the IPA　Font License, Version 1.0.
 
