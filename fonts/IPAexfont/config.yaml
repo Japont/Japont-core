@@ -1,0 +1,5 @@
+name : "IPAexフォント"
+url  : "http://ipafont.ipa.go.jp/"
+license :
+  type     : IPA
+  filename : "LICENSE_IPA"

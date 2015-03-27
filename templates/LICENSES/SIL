@@ -1,19 +1,21 @@
 /*
 {{export_name}}
-Copyright [{{year}}] {{owner}}
+Copyright {{year}} {{owner.decode('utf-8')}}
 
 このフォントは，SIL Open Font License Version 1.1に基づいてライセンスされます．
 詳しくは以下の英文を参照してください．
 =========================================================
 
 {{export_name}}
-Copyright [{{year}}] {{owner}}
+Copyright {{year}} {{owner.decode('utf-8')}}
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1.
 
-This font was created by modifying {{font_name}}.
+This font was created by modifying "{{font_name}}".
 Modification: Subsetting.
 ---------------------------------------------------------
-{{license}}
+** License of original font **
+
+{{license.decode('utf-8')}}
 
 */

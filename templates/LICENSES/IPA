@@ -1,7 +1,7 @@
 /*
 
 {{export_name}}
-Copyright [{{year}}] {{owner}}
+Copyright {{year}} {{owner}}
 
 This font is licensed under the IPA　Font License, Version 1.0.
 
@@ -9,20 +9,22 @@ Please read Japanese message below.
 =========================================================
 
 {{export_name}}
-Copyright [{{year}}] {{owner}}
+Copyright {{year}} {{owner.decode('utf-8')}}
 
 このフォントは，IPAフォントライセンスv1.0の下に配布されています．
 IPAフォントライセンス第3条1項に基づき，以下の情報を提供します．
 
-元となったフォント名： {{font_name}}
+元となったフォント名： "{{font_name}}"
 元となったフォントの配布場所： {{font_url}}
 改変内容： 収録されているフォントデータの削減
 改変フォントの入手方法：
 次のURLフォームに，ダブルクオーテーション（"）で囲まれた文字列を入力し，送信してください．
 {{url_form}}
-送信文字列："{{text}}"
+送信文字列："{{text.decode('utf-8')}}"
 
 ---------------------------------------------------------
-{{license}}
+** License of original font **
+
+{{license.decode('utf-8')}}
 
 */
