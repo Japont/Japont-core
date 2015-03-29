@@ -15,8 +15,11 @@ app.debug = True
 
 @app.before_request
 def before_request():
-    os.environ['HEROKU_URL'] = \
-      os.environ.get('HEROKU_URL', request.headers['HOST'])
+    if os.environ.has_key('HEROKU_URL'):
+        os.environ['HEROKU_URL'] = \
+          os.environ.get('HEROKU_URL', request.headers['HOST'])
+        t = threading.Thread(target=ping_me)
+        t.start()
     return
 
 @app.route('/')
@@ -206,8 +209,5 @@ app.config['root_dir'] = dirname(__file__)
 app.config['font_list'] = load_font_list()
 
 if __name__ == '__main__':
-    t = threading.Thread(target=ping_me)
-    t.start()
-
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
