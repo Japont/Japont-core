@@ -1,7 +1,7 @@
 #! python
 # coding: utf-8
 
-import os, re, sys, time, random, json, base64, yaml
+import os, re, sys, time, random, json, base64, yaml, threading, httplib
 from os import path, listdir, remove
 from os.path import relpath, isfile, abspath, dirname, basename
 from glob import glob
@@ -192,11 +192,22 @@ def load_font_list():
         font_list[dirname].sort()
     return font_list
 
+def ping_me():
+    if os.environ.has_key('HEROKU_URL'):
+        conn = httplib.HTTPConnection(os.environ['HEROKU_URL'], 443)
+        conn.request('HEAD', '/')
+    t = threading.Timer(10, ping_me)
+    t.start()
+    return
+
 # config
 app.config['owner'] = u'3846masa'
 app.config['root_dir'] = dirname(__file__)
 app.config['font_list'] = load_font_list()
 
 if __name__ == '__main__':
+    t = threading.Thread(target=ping_me)
+    t.start()
+
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
