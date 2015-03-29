@@ -15,7 +15,7 @@ app.debug = True
 
 @app.before_request
 def before_request():
-    if os.environ.has_key('HEROKU_URL'):
+    if not os.environ.has_key('HEROKU_URL'):
         os.environ['HEROKU_URL'] = \
           os.environ.get('HEROKU_URL', request.headers['HOST'])
         t = threading.Thread(target=ping_me)
