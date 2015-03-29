@@ -16,7 +16,7 @@ app.debug = True
 @app.before_request
 def before_request():
     os.environ['HEROKU_URL'] = \
-      os.environ['HEROKU_URL'] || request.headers['HOST']
+      os.environ.get('HEROKU_URL', request.headers['HOST'])
     return
 
 @app.route('/')
