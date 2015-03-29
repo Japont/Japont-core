@@ -13,9 +13,23 @@ from flask import (
 app = Flask(__name__)
 app.debug = True
 
+@app.before_request
+def before_request():
+    os.environ['HEROKU_URL'] = \
+      os.environ['HEROKU_URL'] || request.header['HOST']
+    return
+
 @app.route('/')
 def index():
-    return u'テスト'
+    return u'Welcome Japont!\nHEROKU_URL : %s' % os.environ['HEROKU_URL']
+
+@app.route('/japont.js')
+def library_js():
+    response = make_response(render_template(
+      'japont.js',
+      HEROKU_URL=os.environ['HEROKU_URL']))
+    response.headers['Content-Type'] = "application/javascript"
+    return response
 
 @app.route('/fontlist.json')
 def fontlist():
