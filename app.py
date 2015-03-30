@@ -1,9 +1,9 @@
 #! python
 # coding: utf-8
 
-import os, re, sys, time, random, json, base64, yaml, threading, httplib
+import os, re, sys, time, random, json, base64, yaml, threading, httplib, dotenv
 from os import path, listdir, remove
-from os.path import relpath, isfile, abspath, dirname, basename
+from os.path import relpath, isfile, exists, abspath, dirname, basename
 from glob import glob
 from datetime import datetime
 from subprocess import Popen, PIPE
@@ -13,11 +13,19 @@ from flask import (
 app = Flask(__name__)
 app.debug = True
 
+env_file = abspath(path.join('/tmp', '.env'))
+if not os.path.exists(env_file):
+    f = open(env_file, 'w')
+    f.write('')
+    f.close()
+dotenv.load_dotenv(env_file)
+
 @app.before_request
 def before_request():
     if not os.environ.has_key('HEROKU_URL'):
         os.environ['HEROKU_URL'] = \
           os.environ.get('HEROKU_URL', request.headers['HOST'])
+        dotenv.set_key(env_file, 'HEROKU_URL', os.environ['HEROKU_URL'])
         t = threading.Thread(target=ping_me)
         t.start()
     return
