@@ -209,7 +209,7 @@ def ping_me():
         print os.environ['HEROKU_URL']
         conn = httplib.HTTPSConnection(os.environ['HEROKU_URL'])
         conn.request('HEAD', '/')
-    t = threading.Timer(10, ping_me)
+    t = threading.Timer(5*60, ping_me)
     t.start()
     return
 
