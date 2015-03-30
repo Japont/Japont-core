@@ -4,7 +4,3 @@
   font-family: '{{font_family}}';
   src: url('data:font/truetype;base64,{{export_base64}}') format('truetype');
 }
-
-* {
-  font-family: '{{font_family}}';
-}
