@@ -204,6 +204,7 @@ def load_font_list():
     return font_list
 
 def ping_me():
+    print 'Pinger!!'
     if os.environ.has_key('HEROKU_URL'):
         conn = httplib.HTTPConnection(os.environ['HEROKU_URL'], 443)
         conn.request('HEAD', '/')
