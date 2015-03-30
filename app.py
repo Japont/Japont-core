@@ -206,6 +206,7 @@ def load_font_list():
 def ping_me():
     print 'Pinger!!'
     if os.environ.has_key('HEROKU_URL'):
+        print os.environ['HEROKU_URL']
         conn = httplib.HTTPConnection(os.environ['HEROKU_URL'], 443)
         conn.request('HEAD', '/')
     t = threading.Timer(10, ping_me)
