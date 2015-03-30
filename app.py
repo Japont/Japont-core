@@ -176,14 +176,17 @@ def fontcss():
     except ValueError:
         response = Response()
         response.status_code = 400
+        response.headers['Access-Control-Allow-Origin'] = "*"
         return response
     except IOError:
         response = Response()
         response.status_code = 404
+        response.headers['Access-Control-Allow-Origin'] = "*"
         return response
     except Exception:
         response = Response()
         response.status_code = 500
+        response.headers['Access-Control-Allow-Origin'] = "*"
         return response
   
     response = make_response(render_template(
