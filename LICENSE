@@ -1,3 +1,10 @@
+fonts フォルダ以外は，以下のApache License version 2.0を適用します．
+fonts フォルダは，各フォントのライセンスに準じます．
+
+Copyright 2015 3846masa
+
+---------------------------------------------------------
+
 Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -186,7 +193,7 @@ Apache License
       same "printed page" as the copyright notice for easier
       identification within third-party archives.
 
-   Copyright {yyyy} {name of copyright owner}
+   Copyright 2015 3846masa
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -199,4 +206,3 @@ Apache License
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-
