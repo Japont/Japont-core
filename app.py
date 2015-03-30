@@ -40,6 +40,7 @@ def library_js():
       'japont.js',
       HEROKU_URL=os.environ['HEROKU_URL']))
     response.headers['Content-Type'] = "application/javascript"
+    response.headers['Access-Control-Allow-Origin'] = "*"
     return response
 
 @app.route('/fontlist.json')
