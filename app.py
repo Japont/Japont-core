@@ -96,39 +96,27 @@ def fontcss():
         export_filepath = abspath(export_filepath)
 
         # make script
-        script = u''
-
-        script += u"Open(\"%s\")\n" % font_filepath
-        script += u"""
-        if ($cidfamilyname != "")
-          PostNotice($cidfamilyname)
-        elseif ($familyname != "")
-          PostNotice($familyname)
-        else
-          PostNotice($filename:r)
-        endif
-        """
-
+        chars = list()
         char_list = list(json_data['text'])
         for char in char_list:
-            script += u"SelectMore(%s)\n" % ord(char)
-
-        script += "SelectInvert()\n"
-        script += "Clear()\n"
-        script += "SetFontNames(\"{0}\", \"{0}\", \"{0}\", \"\",  \"japont\")\n".format(export_basename)
-        script += "Generate(\"%s\")\n" % export_filepath
-        script += "Quit(0)\n"
-
+            chars.append(ord(char))
+        
+        script = render_template(
+            "generate.py",
+            chars=json.dumps(chars),
+            fontpath=font_filepath,
+            exportpath=export_filepath)
+        
         fontforge = Popen(
-            "fontforge -lang=ff -script",
-            shell=True, stdin=PIPE, stderr=PIPE)
+            "fontforge -lang=py -script",
+            shell=True, stdin=PIPE, stdout=PIPE)
         fontforge.stdin.write(script)
         fontforge.stdin.close()
         fontforge.wait()
 
-        fontforge_stderr = fontforge.stderr.read()
-        fontforge.stderr.close()
-        font_familyname = fontforge_stderr.split('\n')[-2]
+        fontforge_stdout = fontforge.stdout.read()
+        fontforge.stdout.close()
+        font_familyname = fontforge_stdout.split('\n')[0]
 
         export_data = open(export_filepath).read()
         export_base64 = base64.b64encode(export_data)
@@ -173,21 +161,23 @@ def fontcss():
             font_url=font_origin_url,
             text=json_data['text'])
 
-    except ValueError:
-        response = Response()
-        response.status_code = 400
-        response.headers['Access-Control-Allow-Origin'] = "*"
-        return response
-    except IOError:
-        response = Response()
-        response.status_code = 404
-        response.headers['Access-Control-Allow-Origin'] = "*"
-        return response
-    except Exception:
-        response = Response()
-        response.status_code = 500
-        response.headers['Access-Control-Allow-Origin'] = "*"
-        return response
+    # except ValueError:
+    #     response = Response()
+    #     response.status_code = 400
+    #     response.headers['Access-Control-Allow-Origin'] = "*"
+    #     return response
+    # except IOError:
+    #     response = Response()
+    #     response.status_code = 404
+    #     response.headers['Access-Control-Allow-Origin'] = "*"
+    #     return response
+    # except Exception:
+    #     response = Response()
+    #     response.status_code = 500
+    #     response.headers['Access-Control-Allow-Origin'] = "*"
+    #     return response
+    except None:
+        pass
 
     response = make_response(render_template(
       'font.css',
