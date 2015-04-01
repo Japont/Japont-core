@@ -11,7 +11,7 @@ elif not font.familyname is None :
 else :
     fontname = os.path.splitext(font.default_base_filename)[0]
 
-print fontname + "\n"
+print fontname
 
 l = len(chars)
 for i in range(0, l):
