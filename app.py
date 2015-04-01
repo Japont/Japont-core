@@ -124,6 +124,7 @@ def fontcss():
 
         # make license
         font_origin_url = ""
+        license_file = license_type = None
         font_config_path = path.join(dirname(font_filepath), 'config.yaml')
         if isfile(font_config_path):
             f = open(path.join(dirname(font_filepath), 'config.yaml'), 'r')
@@ -132,14 +133,15 @@ def fontcss():
             if font_config.has_key('url'):
                 font_origin_url = font_config['url']
             if font_config.has_key('license'):
-                if font_config['license'].has_key('file'):
-                    license_file = font_config['license']['file']
+                if font_config['license'].has_key('filename'):
+                    license_file = font_config['license']['filename']
+                    license_file = path.join(dirname(font_filepath), license_file)
                 if font_config['license'].has_key('type'):
                     license_type = font_config['license']['type']
 
-        if False in {
-          'license_file' in locals(),
-          'license_type' in locals()
+        if True in {
+          license_file is None,
+          license_type is None
         }:
             license_file = glob(path.join(dirname(font_filepath), 'LICENSE*'))
             if not len(license_file) == 1:
@@ -161,23 +163,21 @@ def fontcss():
             font_url=font_origin_url,
             text=json_data['text'])
 
-    # except ValueError:
-    #     response = Response()
-    #     response.status_code = 400
-    #     response.headers['Access-Control-Allow-Origin'] = "*"
-    #     return response
-    # except IOError:
-    #     response = Response()
-    #     response.status_code = 404
-    #     response.headers['Access-Control-Allow-Origin'] = "*"
-    #     return response
-    # except Exception:
-    #     response = Response()
-    #     response.status_code = 500
-    #     response.headers['Access-Control-Allow-Origin'] = "*"
-    #     return response
-    except None:
-        pass
+    except ValueError:
+        response = Response()
+        response.status_code = 400
+        response.headers['Access-Control-Allow-Origin'] = "*"
+        return response
+    except IOError:
+        response = Response()
+        response.status_code = 404
+        response.headers['Access-Control-Allow-Origin'] = "*"
+        return response
+    except Exception:
+        response = Response()
+        response.status_code = 500
+        response.headers['Access-Control-Allow-Origin'] = "*"
+        return response
 
     response = make_response(render_template(
       'font.css',
