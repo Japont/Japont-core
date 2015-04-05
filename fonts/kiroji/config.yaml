@@ -1,0 +1,8 @@
+name : "きろ字"
+url  : "http://www.ez0.net"
+license :
+  type     : Others
+  filename :
+    [
+      "License.txt"
+    ]

@@ -1,0 +1,9 @@
+name : "JapanSans"
+url  : "http://webfontfan.com/japansans/?p=20"
+license :
+  type     : Apache
+  filename :
+    [
+      "readme.txt",
+      "LICENSE.txt"
+    ]

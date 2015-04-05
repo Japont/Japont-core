@@ -1,0 +1,9 @@
+name : "フォント910"
+url  : "http://www.font910.jp/font-list/conposite-comic.html"
+license :
+  type     : Apache
+  filename :
+    [
+      "readme.txt",
+      "Apache License 2.0.txt"
+    ]

@@ -1,0 +1,9 @@
+name : "明朝體フォント むつき"
+url  : "http://mandel59.github.io/mutsuki/index.html"
+license :
+  type     : Others
+  filename :
+    [
+      "LICENSE",
+      "LICENSE.ja"
+    ]

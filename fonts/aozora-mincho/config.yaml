@@ -1,0 +1,9 @@
+name : "あおぞら明朝"
+url  : "http://blueskis.wktk.so/AozoraMincho/download.html"
+license :
+  type     : IPA
+  filename :
+    [
+      "readme.txt",
+      "licence.txt"
+    ]

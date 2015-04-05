@@ -1,0 +1,10 @@
+name : "フォントな。"
+url  : "http://www.fontna.com/category/gallery/"
+license :
+  type     : IPA
+  filename :
+    [
+      "LICENSE",
+      "mplus-TESTFLIGHT-057/LICENSE_J",
+      "IPAexfont00201/IPA_Font_License_Agreement_v1.0.txt"
+    ]

@@ -1,0 +1,8 @@
+name : "源影・源抜ゴシック"
+url  : "http://blueskis.wktk.so/blog2/main/index.php?Garraly"
+license :
+  type     : Apache
+  filename :
+    [
+      "readme.txt"
+    ]

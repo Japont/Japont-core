@@ -1,0 +1,9 @@
+name : "たれフォント計画"
+url  : "http://graphics.tailtame.com/archives/tare-font/"
+license :
+  type     : Others
+  filename :
+    [
+      "readme.txt",
+      "MT_TARE_20030403.TXT"
+    ]

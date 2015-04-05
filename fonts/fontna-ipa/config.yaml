@@ -1,0 +1,9 @@
+name : "フォントな。"
+url  : "http://www.fontna.com/category/gallery/"
+license :
+  type     : IPA
+  filename :
+    [
+      "ReadMe.txt",
+      "IPAexfont00201/IPA_Font_License_Agreement_v1.0.txt"
+    ]

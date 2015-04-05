@@ -1,5 +1,9 @@
-name : "﻿Miguフォント"
-url  : "http://mix-mplus-ipa.sourceforge.jp/migu/"
+name : "M+とIPAの合成フォント"
+url  : "http://mix-mplus-ipa.sourceforge.jp/"
 license :
   type     : IPA
-  filename : "migu-README.txt"
+  filename :
+    [
+      "migu-README.txt",
+      "IPAexfont00303/IPA_Font_License_Agreement_v1.0.txt"
+    ]

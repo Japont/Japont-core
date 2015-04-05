@@ -1,0 +1,10 @@
+name : "フォントな自由"
+url  : "http://fontna.com/freefont/?cat=1"
+license :
+  type     : IPA
+  filename :
+    [
+      "LICENSE",
+      "mplus-TESTFLIGHT-043/LICENSE_J",
+      "IPAexfont00303/IPA_Font_License_Agreement_v1.0.txt"
+    ]

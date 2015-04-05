@@ -1,0 +1,9 @@
+name : "刻ゴシックフォント"
+url  : "http://freefonts.jp/font-koku-go.html"
+license :
+  type     : Apache
+  filename :
+    [
+      "readme.txt",
+      "Apache License 2.0.txt"
+    ]

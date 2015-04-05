@@ -1,0 +1,8 @@
+name : "たぬきフォント"
+url  : "http://tanukifont.com/link-of-fonts/"
+license :
+  type     : Others
+  filename :
+    [
+      "readme.txt"
+    ]

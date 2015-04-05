@@ -1,0 +1,9 @@
+name : "フォントな自由"
+url  : "http://fontna.com/freefont/?cat=1"
+license :
+  type     : Apache
+  filename :
+    [
+      "ReadMe.txt",
+      "LICENSE.txt"
+    ]

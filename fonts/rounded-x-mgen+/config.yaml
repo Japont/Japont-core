@@ -1,0 +1,9 @@
+name : "Rounded-X Mgen+"
+url  : "http://jikasei.me/font/rounded-mgenplus/"
+license :
+  type     : Apache
+  filename :
+    [
+      "README_Rounded-MgenPlus.txt",
+      "LICENSE.txt"
+    ]

@@ -1,0 +1,8 @@
+name : "さざなみフォント"
+url  : "http://sourceforge.jp/projects/efont/"
+license :
+  type     : Others
+  filename :
+    [
+      "README"
+    ]

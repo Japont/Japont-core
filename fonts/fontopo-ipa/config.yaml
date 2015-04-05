@@ -1,0 +1,9 @@
+name : "fontopo"
+url  : "http://fontopo.com/?cat=7"
+license :
+  type     : IPA
+  filename :
+    [
+      "ReadMe.txt",
+      "IPA_Font_License_Agreement_v1.0.txt"
+    ]

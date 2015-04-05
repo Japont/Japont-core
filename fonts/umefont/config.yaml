@@ -1,0 +1,8 @@
+name : "梅フォント"
+url  : "http://sourceforge.jp/projects/ume-font/"
+license :
+  type     : Others
+  filename :
+    [
+      "license.txt"
+    ]

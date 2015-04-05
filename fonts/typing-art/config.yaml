@@ -1,0 +1,9 @@
+name : "Typing Art"
+url  : "http://typingart.net/"
+license :
+  type     : IPA
+  filename :
+    [
+      "read_me.txt",
+      "IPA_Font_License_Agreement_v1.0.txt"
+    ]

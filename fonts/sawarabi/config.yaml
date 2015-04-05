@@ -1,0 +1,8 @@
+name : "さわらびフォント"
+url  : "http://sourceforge.jp/projects/sawarabi-fonts/"
+license :
+  type     : Others
+  filename :
+    [
+      "README_ja.txt"
+    ]

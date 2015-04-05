@@ -1,0 +1,9 @@
+name : "fontopo"
+url  : "http://fontopo.com/?cat=7"
+license :
+  type     : Apache
+  filename :
+    [
+      "ReadMe.txt",
+      "LICENSE.txt"
+    ]

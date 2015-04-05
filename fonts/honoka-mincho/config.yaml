@@ -1,0 +1,9 @@
+name : "ほのか明朝"
+url  : "http://font.gloomy.jp/honoka-mincho-dl.html"
+license :
+  type     : IPA
+  filename :
+    [
+      "readme.txt",
+      "ipaexfont/IPA_Font_License_Agreement_v1.0.txt"
+    ]

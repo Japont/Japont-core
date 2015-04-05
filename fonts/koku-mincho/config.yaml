@@ -1,0 +1,9 @@
+name : "刻明朝フォント"
+url  : "http://freefonts.jp/font-koku-min.html"
+license :
+  type     : IPA
+  filename :
+    [
+      "readme.txt",
+      "ipaexfont/IPA_Font_License_Agreement_v1.0.txt"
+    ]

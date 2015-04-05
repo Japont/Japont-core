@@ -1,0 +1,8 @@
+name : "Gutenberg Labo"
+url  : "http://gutenberg.sourceforge.jp/ja/index.html"
+license :
+  type     : Others
+  filename :
+    [
+      "GL-AntiquePlus-readme.txt"
+    ]

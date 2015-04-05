@@ -1,0 +1,9 @@
+name : "k-font"
+url  : "http://font.sumomo.ne.jp/font_1.html"
+license :
+  type     : Apache
+  filename :
+    [
+      "readme.txt",
+      "Apache License 2.0.txt",
+    ]

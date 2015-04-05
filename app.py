@@ -23,8 +23,7 @@ dotenv.load_dotenv(env_file)
 @app.before_request
 def before_request():
     if not os.environ.has_key('HEROKU_URL'):
-        os.environ['HEROKU_URL'] = \
-          os.environ.get('HEROKU_URL', request.headers['HOST'])
+        os.environ['HEROKU_URL'] = request.headers['HOST']
         dotenv.set_key(env_file, 'HEROKU_URL', os.environ['HEROKU_URL'])
         t = threading.Thread(target=ping_me)
         t.start()
@@ -100,13 +99,13 @@ def fontcss():
         char_list = list(json_data['text'])
         for char in char_list:
             chars.append(ord(char))
-        
+
         script = render_template(
             "generate.py",
             chars=json.dumps(chars),
             fontpath=font_filepath,
             exportpath=export_filepath)
-        
+
         fontforge = Popen(
             "fontforge -lang=py -script",
             shell=True, stdin=PIPE, stdout=PIPE)
@@ -124,7 +123,7 @@ def fontcss():
 
         # make license
         font_origin_url = ""
-        license_file = license_type = None
+        license_files = license_type = None
         font_config_path = path.join(dirname(font_filepath), 'config.yaml')
         if isfile(font_config_path):
             f = open(path.join(dirname(font_filepath), 'config.yaml'), 'r')
@@ -134,25 +133,29 @@ def fontcss():
                 font_origin_url = font_config['url']
             if font_config.has_key('license'):
                 if font_config['license'].has_key('filename'):
-                    license_file = font_config['license']['filename']
-                    license_file = path.join(dirname(font_filepath), license_file)
+                    license_files = font_config['license']['filename']
+                    license_files = path.join(dirname(font_filepath), license_file)
                 if font_config['license'].has_key('type'):
                     license_type = font_config['license']['type']
 
         if True in {
-          license_file is None,
+          license_files is None,
           license_type is None
         }:
-            license_file = glob(path.join(dirname(font_filepath), 'LICENSE*'))
-            if not len(license_file) == 1:
-                raise Exception()
-            license_file = path.join(dirname(font_filepath), license_file[0])
-            license_info = basename(license_file).split('_')
-            license_type = 'Others'
-            if len(license_info) == 2:
-                license_type = license_info[1]
+            raise Exception()
+            # license_file = glob(path.join(dirname(font_filepath), 'LICENSE*'))
+            # if not len(license_file) == 1:
+            #     raise Exception()
+            # license_file = path.join(dirname(font_filepath), license_file[0])
+            # license_info = basename(license_file).split('_')
+            # license_type = 'Others'
+            # if len(license_info) == 2:
+            #     license_type = license_info[1]
 
-        license_text = open(license_file).read()
+        license_text = None
+        for license_file in license_files:
+            license_text += open(license_file).read()
+            license_text += "\n----------------------------\n"
         license_comment = render_template(
             'LICENSES/%s' % license_type,
             license=license_text,

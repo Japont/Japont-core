@@ -1,0 +1,9 @@
+name : "源真ゴシック"
+url  : "http://jikasei.me/font/genshin/"
+license :
+  type     : Apache
+  filename :
+    [
+      "README_GenShin.txt",
+      "LICENSE.txt"
+    ]

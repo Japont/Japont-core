@@ -1,0 +1,8 @@
+name : "瀬戸フォント"
+url  : "http://sourceforge.jp/projects/setofont/releases/"
+license :
+  type     : SIL
+  filename :
+    [
+      "readme.txt"
+    ]

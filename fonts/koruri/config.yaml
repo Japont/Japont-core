@@ -1,0 +1,10 @@
+name : "Koruri"
+url  : "http://koruri.lindwurm.biz/"
+license :
+  type     : Apache
+  filename :
+    [
+      "README.md",
+      "README_ja.md",
+      "LICENSE"
+    ]

@@ -1,0 +1,8 @@
+name : "Ricty Diminished"
+url  : "https://github.com/yascentur/RictyDiminished"
+license :
+  type     : SIL
+  filename :
+    [
+      "README.md"
+    ]
