@@ -27,7 +27,7 @@ Dynamic Subsetting System for Japanese fonts.
 ```html
 <!-- https://github.com/WebComponents/webcomponentsjs/# -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.6.0/CustomElements.min.js"></script>
-<script src="//{HEROKU_URL}/japont.js"/>
+<script src="//{HEROKU_URL}/japont.js"></script>
 <meta is="web-font" src="mplus/mplus-1p-light.woff" selector="*" alias="mplus"/>
 ```
 
