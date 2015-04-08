@@ -6,18 +6,48 @@ Dynamic Subsetting System for Japanese fonts.
 比較的簡単に日本語フォントを導入できます
 
 ## How to use
+
+サンプルサイトは[こちら](https://japont.herokuapp.com)
+
+まずは，自分専用の配信サーバを作りましょう．
+
+[Heroku](https://www.heroku.com/)を使って無料で作れます．
+
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
+そしたら，立ち上がったサーバにアクセスしましょう．
+
+
+### Sample Code
+
+配信サーバのトップページは，テストページになっています．
+
+サンプルコードもテストページで生成できます．
+
 ```html
-<script src="https://japont.herokuapp.com/japont.js"/>
-<link is="font-face" src="mplus/mplus-1p-light.woff" selector="*" alias="mplus"/>
+<!-- https://github.com/WebComponents/webcomponentsjs/# -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.6.0/CustomElements.min.js"></script>
+<script src="//{HEROKU_URL}/japont.js"/>
+<meta is="web-font" src="mplus/mplus-1p-light.woff" selector="*" alias="mplus"/>
+```
+
+```js
+var webFont = document.createElement('meta', 'web-font');
+webFont.setAttribute('src', 'mplus/mplus-ip-light.woff');
+webFont.setAttribute('selector', '#any-id');
+document.head.appendChild(webFont);
 ```
 
 ## LICENSE
 "fonts" folder apply the license of each font.
+
 Except "fonts" folder, apply the Apache License version 2.0.
 
 fonts フォルダは，各フォントのライセンスに準じます．
+
 fonts フォルダ以外は，Apache License version 2.0を適用します．
 
+-----------------------
 Copyright 2015 3846masa
 
 ## Fonts
@@ -65,7 +95,6 @@ Allow me to use this opportunity to offer my thanks.
 
 - [8:51:22 pm](http://www39.atpages.jp/yagoinienie/85122font.html)
   - 851手書き雑フォント
-  - 851レトロゴ
 
 
 - [PROJECT DARTS](http://www.p-darts.jp/font/)
@@ -192,3 +221,13 @@ Allow me to use this opportunity to offer my thanks.
 - [Y.OzFont](http://yozvox.web.fc2.com/)
   - ペン字版
   - 毛筆版
+
+
+## 改善点他
+- 読み込みが遅い
+  - Herokuのスペックが低い
+  - Dockerfileの提供をする予定
+
+
+- フォントの追加
+  - 追加方法をまとめておく

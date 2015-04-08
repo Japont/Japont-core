@@ -31,7 +31,12 @@ def before_request():
 
 @app.route('/')
 def index():
-    return render_template('index.html', HEROLU_URL=os.environ['HEROKU_URL'])
+    response = make_response(render_template(
+      'index.html',
+      HEROKU_URL=os.environ['HEROKU_URL']))
+    if (os.environ['HEROKU_URL']) != 'japont.herokuapp.com':
+        response.headers['X-Robots-Tag'] = 'noindex, nofollow';
+    return response
 
 @app.route('/japont.js')
 def library_js():
@@ -161,23 +166,21 @@ def fontcss():
             font_url=font_origin_url,
             text=json_data['text'])
 
-    # except ValueError:
-    #     response = Response()
-    #     response.status_code = 400
-    #     response.headers['Access-Control-Allow-Origin'] = "*"
-    #     return response
-    # except IOError:
-    #     response = Response()
-    #     response.status_code = 404
-    #     response.headers['Access-Control-Allow-Origin'] = "*"
-    #     return response
-    # except Exception:
-    #     response = Response()
-    #     response.status_code = 500
-    #     response.headers['Access-Control-Allow-Origin'] = "*"
-    #     return response
-    except None:
-      pass
+    except ValueError:
+        response = Response()
+        response.status_code = 400
+        response.headers['Access-Control-Allow-Origin'] = "*"
+        return response
+    except IOError:
+        response = Response()
+        response.status_code = 404
+        response.headers['Access-Control-Allow-Origin'] = "*"
+        return response
+    except Exception:
+        response = Response()
+        response.status_code = 500
+        response.headers['Access-Control-Allow-Origin'] = "*"
+        return response
 
     response = make_response(render_template(
       'font.css',
