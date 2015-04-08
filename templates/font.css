@@ -2,5 +2,5 @@
 
 @font-face {
   font-family: '{{font_family}}';
-  src: url('data:font/truetype;base64,{{export_base64}}') format('truetype');
+  src: url('data:application/x-font-woff;base64,{{export_base64}}') format('woff');
 }
