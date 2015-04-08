@@ -6,7 +6,6 @@ from os import path, listdir, remove
 from os.path import relpath, isfile, exists, abspath, dirname, basename
 from glob import glob
 from datetime import datetime
-from subprocess import Popen, PIPE
 from flask import (
   Flask, request, render_template, Response, jsonify, make_response)
 
@@ -103,27 +102,12 @@ def fontcss():
         export_filepath = abspath(export_filepath)
 
         # make script
-        chars = list()
         char_list = list(json_data['text'])
-        for char in char_list:
-            chars.append(ord(char))
-
-        script = render_template(
-            "generate.py",
-            chars=json.dumps(chars),
-            fontpath=font_filepath,
-            exportpath=export_filepath)
-
-        fontforge = Popen(
-            "fontforge -lang=py -script",
-            shell=True, stdin=PIPE, stdout=PIPE)
-        fontforge.stdin.write(script)
-        fontforge.stdin.close()
-        fontforge.wait()
-
-        fontforge_stdout = fontforge.stdout.read()
-        fontforge.stdout.close()
-        font_familyname = fontforge_stdout.split('\n')[0]
+        chars = [ord(char) for char in char_list]
+        from fontreducer import generate_subset, _get_fontname
+        sub_font = generate_subset(chars, font_filepath)
+        font_familyname = _get_fontname(sub_font)
+        sub_font.generate(export_filepath)
 
         export_data = open(export_filepath).read()
         export_base64 = base64.b64encode(export_data)
