@@ -1,0 +1,10 @@
+{
+  "name": "Japont",
+  "description": "Dynamic Subsetting System for Japanese fonts.",
+  "website": "https://japont.herokuapp.com/",
+  "success_url": "/",
+  "env": {
+    "BUILDPACK_URL": "https://github.com/heroku/heroku-buildpack-multi.git",
+    "TZ": "Asia/Tokyo"
+  }
+}
