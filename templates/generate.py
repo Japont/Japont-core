@@ -16,9 +16,18 @@ print fontname
 l = len(chars)
 for i in range(0, l):
     char = chars[i]
-    uni = font[char].unicode
-    if uni != char:
-        chars.append(uni)
+    try:
+        uni = font[char].unicode
+        if uni != char:
+            chars.append(uni)
+        alts = font[char].altuni
+        if alts is None:
+            continue
+        for alt in alts:
+            if alt[0] != char:
+                chars.append(alt[0])
+    except TypeError:
+        pass
 
 for c in chars:
     font.selection.select(("more", None), c)

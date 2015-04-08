@@ -1,35 +1,35 @@
 Copyright(c) Information-technology Promotion Agency, Japan (IPA), 2003-
 Copyright (C) 2014- freefontnoki
 
-���̃t�H���g�́A�ȉ��̃t�H���g�ɃI���W�i���̕������������H�������̂ł��B
-�uIPAex�����v
-�uIPAex�S�V�b�N�v
+このフォントは、以下のフォントにオリジナルの文字を加え加工したものです。
+「IPAex明朝」
+「IPAexゴシック」
 
-�y���C�Z���X�z
-���̃t�H���g�̃��C�Z���X�́A�uIPA�t�H���g�v�̃��C�Z���X�ɏ����܂��B
-IPA�t�H���g�̃��C�Z���X�́A�z�z���Ɋ܂܂��uipaexfont�v�t�H���_�́uIPA_Font_License_Agreement_v1.0.txt�v���������������B
-�Ђ炪�ȁE�S�p�J�^�J�i�����̃f�U�C���́u�t���[�t�H���g�̎��v�ɂ����̂ł��B
+【ライセンス】
+このフォントのライセンスは、「IPAフォント」のライセンスに準じます。
+IPAフォントのライセンスは、配布物に含まれる「ipaexfont」フォルダの「IPA_Font_License_Agreement_v1.0.txt」をご覧ください。
+ひらがな・全角カタカナ部分のデザインは「フリーフォントの樹」によるものです。
 
-���̃t�H���g��IPA�t�H���g�̔h���v���O�����ɂȂ�܂��B
-���p�ɂ������ẮuIPA�t�H���g���C�Z���Xv1.0�iIPA Font License Agreement v1.0�j�v�ɓ��ӂ���K�v������܂��B
-�h���v���O�����͑�O�҂̒N�����uIPA�t�H���g���C�Z���Xv1.0�iIPA Font License Agreement v1.0�j�v�̂��ƂŌ��J�E�Ĕz�z�ł��܂��B
+このフォントはIPAフォントの派生プログラムになります。
+利用にあたっては「IPAフォントライセンスv1.0（IPA Font License Agreement v1.0）」に同意する必要があります。
+派生プログラムは第三者の誰もが「IPAフォントライセンスv1.0（IPA Font License Agreement v1.0）」のもとで公開・再配布できます。
 
-�yIPA�t�H���g�ւ̒u���������i�߂����j�z
-1. ���Y�t�H���g�̃A���C���X�g�[�����s���Ă��������B
-2. http://ipafont.ipa.go.jp/ipaexfont/download.html ���t�H���g���_�E�����[�h���Ă��������B�܂��́uipaexfont�v�t�H���_���̃t�H���g��I�����Ă��������B
-3. �uIPAex�����v�uIPAex�S�V�b�N�v��K�v�ɉ����ăC���X�g�[�����Ă��������B
+【IPAフォントへの置き換え方（戻し方）】
+1. 当該フォントのアンインストールを行ってください。
+2. http://ipafont.ipa.go.jp/ipaexfont/download.html よりフォントをダウンロードしてください。または「ipaexfont」フォルダ内のフォントを選択してください。
+3. 「IPAex明朝」「IPAexゴシック」を必要に応じてインストールしてください。
 
-�y���p���p�E�v���O�����ւ̖��ߍ��݂ɂ��āz
-�쐬�������������уf�W�^���E�R���e���c�ɂ��A���̏��p�E�񏤗p�ɂ�����炸
-�����A�ʐM�A�e��L�^���f�B�A�Ȃǂ̔}�̂̌`������킸�A�g�p�����邱�Ƃ��ł��܂��B
-�������A�����IPA�t�H���g�̃��C�Z���X�̂��Ƃɂ���܂��B
+【商用利用・プログラムへの埋め込みについて】
+作成した印刷物およびデジタル・コンテンツにつき、その商用・非商用にかかわらず
+放送、通信、各種記録メディアなどの媒体の形式も問わず、使用をすることができます。
+ただし、これはIPAフォントのライセンスのもとにあります。
 
-�y���ӎ����z
-�t�H���g�̃_�E�����[�h����уC���X�g�[���͂����p�������̐ӔC�ɂ����čs���Ă��������܂��B
-�t�H���g�̎g�p�ɂ��āA�����Ȃ�ۏ؂��s���܂���B
-�������������Ȃ鑹�Q�i�f�[�^���������܂ށj�ɂ��Ă��A�񋟑��͐ӔC�𕉂��܂���B
+【注意事項】
+フォントのダウンロードおよびインストールはご利用される方の責任において行っていただきます。
+フォントの使用について、いかなる保証も行いません。
+発生したいかなる損害（データ損失等を含む）についても、提供側は責任を負いません。
 
-�y�����[�X�m�[�g�z
+【リリースノート】
 2014.03.23
-�u�������v�t�H���g�����J���܂����BIPA�t�H���g�̕������E�Љ����̕����O���t���A�I���W�i���̕����ɓ���ւ��Ă��܂��B
-�܂��AIPA�t�H���g���C�Z���Xv1.0�ɏ]���t�H���g�����ŗL�̂��̂ɂȂ��Ă��܂��B
+「刻明朝」フォントを公開しました。IPAフォントの平仮名・片仮名の文字グリフを、オリジナルの文字に入れ替えています。
+また、IPAフォントライセンスv1.0に従いフォント名も固有のものになっています。

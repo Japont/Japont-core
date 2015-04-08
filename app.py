@@ -31,7 +31,7 @@ def before_request():
 
 @app.route('/')
 def index():
-    return u'Welcome Japont!\nHEROKU_URL : %s' % os.environ['HEROKU_URL']
+    return render_template('index.html', HEROLU_URL=os.environ['HEROKU_URL'])
 
 @app.route('/japont.js')
 def library_js():
@@ -44,7 +44,10 @@ def library_js():
 
 @app.route('/fontlist.json')
 def fontlist():
-    return jsonify(**app.config['font_list'])
+    response = make_response(jsonify(**app.config['font_list']))
+    response.headers['Content-Type'] = "application/javascript"
+    response.headers['Access-Control-Allow-Origin'] = "*"
+    return response
 
 @app.route('/font.css', methods=['POST'])
 def fontcss():
@@ -90,7 +93,7 @@ def fontcss():
            (json_data['fontFamily'] == u''):
             json_data['fontFamily'] = export_basename
 
-        export_filename = "%s.ttf" % export_basename
+        export_filename = "%s.woff" % export_basename
         export_filepath = path.join(tmp_dir, export_filename)
         export_filepath = abspath(export_filepath)
 
@@ -126,7 +129,7 @@ def fontcss():
         license_files = license_type = None
         font_config_path = path.join(dirname(font_filepath), 'config.yaml')
         if isfile(font_config_path):
-            f = open(path.join(dirname(font_filepath), 'config.yaml'), 'r')
+            f = open(font_config_path, 'r')
             font_config = yaml.safe_load(f)
             f.close()
             if font_config.has_key('url'):
@@ -134,7 +137,6 @@ def fontcss():
             if font_config.has_key('license'):
                 if font_config['license'].has_key('filename'):
                     license_files = font_config['license']['filename']
-                    license_files = path.join(dirname(font_filepath), license_file)
                 if font_config['license'].has_key('type'):
                     license_type = font_config['license']['type']
 
@@ -143,18 +145,11 @@ def fontcss():
           license_type is None
         }:
             raise Exception()
-            # license_file = glob(path.join(dirname(font_filepath), 'LICENSE*'))
-            # if not len(license_file) == 1:
-            #     raise Exception()
-            # license_file = path.join(dirname(font_filepath), license_file[0])
-            # license_info = basename(license_file).split('_')
-            # license_type = 'Others'
-            # if len(license_info) == 2:
-            #     license_type = license_info[1]
 
-        license_text = None
+        license_text = ""
         for license_file in license_files:
-            license_text += open(license_file).read()
+            license_file = path.join(dirname(font_filepath), license_file)
+            license_text += "\n" + open(license_file).read()
             license_text += "\n----------------------------\n"
         license_comment = render_template(
             'LICENSES/%s' % license_type,
@@ -166,21 +161,23 @@ def fontcss():
             font_url=font_origin_url,
             text=json_data['text'])
 
-    except ValueError:
-        response = Response()
-        response.status_code = 400
-        response.headers['Access-Control-Allow-Origin'] = "*"
-        return response
-    except IOError:
-        response = Response()
-        response.status_code = 404
-        response.headers['Access-Control-Allow-Origin'] = "*"
-        return response
-    except Exception:
-        response = Response()
-        response.status_code = 500
-        response.headers['Access-Control-Allow-Origin'] = "*"
-        return response
+    # except ValueError:
+    #     response = Response()
+    #     response.status_code = 400
+    #     response.headers['Access-Control-Allow-Origin'] = "*"
+    #     return response
+    # except IOError:
+    #     response = Response()
+    #     response.status_code = 404
+    #     response.headers['Access-Control-Allow-Origin'] = "*"
+    #     return response
+    # except Exception:
+    #     response = Response()
+    #     response.status_code = 500
+    #     response.headers['Access-Control-Allow-Origin'] = "*"
+    #     return response
+    except None:
+      pass
 
     response = make_response(render_template(
       'font.css',

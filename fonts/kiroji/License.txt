@@ -1,5 +1,5 @@
-Name    :  ‚«‚ëš
-Version :  ver2.1.0 - 2007/06/25 - License‚ğNew BSD license‚É•ÏX
+Name    :  ãã‚å­—
+Version :  ver2.1.0 - 2007/06/25 - Licenseã‚’New BSD licenseã«å¤‰æ›´
 URL     :  www.ez0.net
 
 LICENSE : New BSD license

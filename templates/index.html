@@ -1,10 +1,91 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-<head>
-    <title>Hello {{ name }}</title>
-</head>
-<body>
-    <h1>こんにちは{{ name }}さん</h1>
-    <a href="http://flask.pocoo.org/"><img src="/static/img/flask.png"></a>
-</body>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Japont - 美しい日本語をウェブサイトに</title>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shThemeDefault.css"/>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushXml.js"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.6.0/CustomElements.min.js"></script>
+
+    <script src="/japont.js"></script>
+    <meta is="web-font" src="honoka-mincho/honoka-mincho.woff" selector="h1"/>
+    <meta is="web-font" src="" selector="#sampleCode" id="sampleCodeFont"/>
+    <meta is="web-font" src="" selector="#testText" id="testFont"/>
+    <script src="/static/script.js"></script>
+    <style>
+      .btn {
+        margin: 0 !important;
+      }
+      #testText {
+        font-size: xx-large;
+        line-height: 1.75;
+        word-wrap: break-word;
+        opacity: 0.0;
+        transition: opacity 0.5s ease 0;
+      }
+      .syntaxhighlighter code {
+        padding: 0;
+        font-size: 100%;
+        color: inherit;
+        background-color: inherit;
+        border-radius: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-1"></div>
+        <div class="col-xs-10">
+          <h1 class="text-center">
+            Japont<br>
+            <small>美しい日本語をウェブサイトに</small>
+          </h1>
+        </div>
+        <div class="col-xs-1"></div>
+      </div>
+      <div class="row">
+        <div class="col-xs-1"></div>
+        <div class="col-xs-8">
+          <select id="fontGroup" name="fontGroup" class="form-control"></select>
+          <select id="fontName" name="fontName" class="form-control"></select>
+        </div>
+        <div class="col-xs-2">
+          <button type="button" id="status" class="btn active btn-block">
+            Status
+          </button>
+          <button type="button" id="apply" class="btn btn-primary btn-block">
+            読み込む
+          </button>
+        </div>
+        <div class="col-xs-1"></div>
+      </div>
+      <div class="row">
+        <div class="col-xs-1"></div>
+        <div class="col-xs-10">
+          <pre id="testText" contenteditable>
+吾輩は猫である。名前はまだない。
+ここの文字は変更できます。
+変更したら、もう一度読み込みボタンを押してください。
+It's a small world.</pre>
+          <pre id="sampleCode">
+            <div style="display: none;">
+              &lt;!-- https://github.com/WebComponents/webcomponentsjs/#&nbsp;--&gt;
+              &lt;script src="//cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.6.0/CustomElements.min.js"&gt;&lt;/script&gt;
+              &lt;script src="//{{HEROLU_URL}}/japont.js"&gt;&lt;/script&gt;
+              &lt;!-- 変更したいDOMのCSSセレクタをselectorとして指定する --&gt;
+              &lt;!-- 例）h1に適応させたい --&gt;
+              &lt;meta is="web-font" src="{fontSrc}" selector="h1"/&gt;
+            </div>
+          </pre>
+        </div>
+        <div class="col-xs-1"></div>
+      </div>
+    </div>
+  </body>
 </html>
