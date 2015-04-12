@@ -6,12 +6,20 @@
 
 (function() {
 
-var DOMLoaded = false;
-window.addEventListener('DOMContentLoaded', function(){
+window.Japont = {};
+
+var DOMLoaded = 
+  (document.readyState === "interactive" ||
+   document.readyState === "complete");
+
+document.addEventListener('DOMContentLoaded', function(){
+  DOMLoaded = true;
+}, false);
+window.addEventListener('load', function(){
   DOMLoaded = true;
 }, false);
 
-var FontFace = document.registerElement('web-font', {
+Japont.HTMLWebFontElement = document.registerElement('web-font', {
   prototype: Object.create(HTMLMetaElement.prototype, {
     createdCallback: {value: function() {
       this._attached = false;
@@ -21,25 +29,25 @@ var FontFace = document.registerElement('web-font', {
       var fontname = this.getAttribute('src');
       var selector = this.getAttribute('selector');
       var alias = this.getAttribute('alias');
-      if (fontname != null) {
+      if (fontname != null && fontname !== "") {
         if (DOMLoaded) {
           this._sendRequest(fontname, selector, alias);
         } else {
           if (this._callback != null)
-            window.removeEventListener(
+            document.removeEventListener(
               'DOMContentLoaded', this._callback, false);
           var callerElem = this;
           this._callback = function() {
             callerElem._sendRequest(fontname, selector, alias);
           };
-          window.addEventListener('DOMContentLoaded', this._callback, false);
+          document.addEventListener('DOMContentLoaded', this._callback, false);
         }
       }
     }},
     detachedCallback: {value: function() {
       this._attached = false;
-      this.fontElement.remove();
-      this.styleElement.remove();
+      this.fontElement.parentNode.removeChild(this.fontElement);
+      this.styleElement.parentNode.removeChild(this.styleElement);
 
       this.fontElement = this.styleElement = null;
     }},
@@ -55,13 +63,13 @@ var FontFace = document.registerElement('web-font', {
             this._sendRequest(fontname, selector, alias);
           } else {
             if (this._callback != null)
-              window.removeEventListener(
+              document.removeEventListener(
                 'DOMContentLoaded', this._callback, false);
             var callerElem = this;
             this._callback = function() {
               callerElem._sendRequest(fontname, selector, alias);
             };
-            window.addEventListener('DOMContentLoaded', this._callback, false);
+            document.addEventListener('DOMContentLoaded', this._callback, false);
           }
         }
       }
@@ -76,7 +84,6 @@ var FontFace = document.registerElement('web-font', {
     }},
     _sendRequest : {value: _sendRequest},
     _setFont     : {value: _setFont},
-    _attached    : {value: false, writable: true},
     _callback    : {value: null,  writable: true}
   }),
   extends      : 'meta'
@@ -125,7 +132,7 @@ function _sendRequest(fontname, selector, alias) {
     }
 
     if (callerElem.fontElement != null)
-      callerElem.fontElement.remove();
+      callerElem.fontElement.parentNode.removeChild(callerElem.fontElement);
     
     callerElem.fontName = xhr.responseText.split('\n')[1];
     var fontNode = document.createElement('style');
@@ -155,7 +162,8 @@ function _sendRequest(fontname, selector, alias) {
 }
 
 function _setFont(alias, selector) {
-  if (this instanceof FontFace && this.fontElement != null) {
+  if (this instanceof Japont.HTMLWebFontElement &&
+      this.fontElement != null) {
     var fontCss = this.fontElement.textContent;
     alias = alias || this.fontName || "undefined";
     fontCss =
@@ -169,9 +177,9 @@ function _setFont(alias, selector) {
   styleNode.setAttribute('class', 'japont-face');
   styleNode.appendChild(textNode);
 
-  if (this instanceof FontFace) {
+  if (this instanceof Japont.HTMLWebFontElement) {
     if (this.styleElement != null)
-      this.styleElement.remove();
+      this.styleElement.parentNode.removeChild(this.styleElement);
 
     this.styleElement = styleNode;
     this.appendChild(styleNode);

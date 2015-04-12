@@ -19,9 +19,9 @@
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.6.0/CustomElements.min.js"></script>
 
-    <script src="/japont.js"></script>
+    <script src="/japont.js" async></script>
     <meta is="web-font" src="honoka-mincho/honoka-mincho.woff" selector="h1"/>
-    <meta is="web-font" src="" selector="#sampleCode" id="sampleCodeFont"/>
+    <meta is="web-font" src="RictyDiminished/RictyDiminished-Regular.woff" selector="#sampleCode" id="sampleCodeFont"/>
     <meta is="web-font" src="" selector="#testText" id="testFont"/>
     <script src="/static/script.js"></script>
     <style>
@@ -34,6 +34,13 @@
         word-wrap: break-word;
         opacity: 0.0;
         transition: opacity 0.5s ease 0;
+      }
+      .syntaxhighlighter {
+        overflow-x: scroll;
+        white-space: nowrap;
+      }
+      .syntaxhighlighter .toolbar {
+        display: none;
       }
       .syntaxhighlighter code {
         padding: 0;
@@ -84,7 +91,7 @@ It's a small world.</pre>
             <div style="display: none;">
               &lt;!-- https://github.com/WebComponents/webcomponentsjs/#&nbsp;--&gt;
               &lt;script src="//cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.6.0/CustomElements.min.js"&gt;&lt;/script&gt;
-              &lt;script src="//{{HEROKU_URL}}/japont.js"&gt;&lt;/script&gt;
+              &lt;script src="//{{HEROKU_URL}}/japont.js"&nbsp;async&gt;&lt;/script&gt;
               &lt;!-- 変更したいDOMのCSSセレクタをselectorとして指定する --&gt;
               &lt;!-- 例）h1に適応させたい --&gt;
               &lt;meta is="web-font" src="{fontSrc}" selector="h1"/&gt;

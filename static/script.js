@@ -31,7 +31,7 @@
 
     var fontGroupSelFire = function(){
       $$('*', fontNameSel).forEach(function(elem){
-        elem.remove();
+        elem.parentNode.removeChild(elem);
       });
       fontlist[this.value].forEach(function(fontName){
         var opt = document.createElement('option');
@@ -49,8 +49,6 @@
       var xhr = e.target;
       if (xhr.status !== 200) return;
       $('#sampleCode > div').textContent += xhr.responseText;
-      $('#sampleCodeFont').setAttribute(
-        'src', 'RictyDiminished/RictyDiminished-Regular.woff');
 
       fontlist = JSON.parse(xhr.responseText);
 
@@ -81,7 +79,7 @@
       newCode.setAttribute('class', 'brush: html;');
       newCode.textContent = sampleCode.replace('{fontSrc}', fontSrc);
       oldCode.parentNode.insertBefore(newCode, oldCode);
-      oldCode.remove();
+      oldCode.parentNode.removeChild(oldCode);
       SyntaxHighlighter.highlight();
     });
   });
