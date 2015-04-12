@@ -49,6 +49,8 @@
       var xhr = e.target;
       if (xhr.status !== 200) return;
       $('#sampleCode > div').textContent += xhr.responseText;
+      $('#sampleCodeFont').setAttribute(
+        'src', 'RictyDiminished/RictyDiminished-Regular.woff');
 
       fontlist = JSON.parse(xhr.responseText);
 
