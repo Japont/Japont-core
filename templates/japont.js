@@ -99,16 +99,19 @@ function _sendRequest(fontname, selector, alias) {
 
   var callerElem = this;
 
-  var targetNode;
+  var targetNodes;
   if (selector == null) {
-    targetNode = document.documentElement;
+    targetNodes = [document.documentElement];
   } else {
-    targetNode = document.querySelector(selector);
+    targetNodes = document.querySelectorAll(selector);
   }
-  if (targetNode == null) {
+  if (targetNodes == null || targetNodes.length === 0) {
     throw new Error('Selector "' + selector + '" is not matched.');
   }
-  var content = targetNode.textContent || targetNode.innerText || '';
+  var content = "";
+  for(var _i = 0; _i < targetNodes.length; _i++) {
+    content += targetNodes[_i].textContent;
+  }
   content = content.replace(/[\r\n]/g, '');
   var charArr = _uniqueChars(content);
 
