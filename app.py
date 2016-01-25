@@ -9,6 +9,8 @@ from datetime import datetime
 from subprocess import Popen, PIPE
 from flask import (
   Flask, request, render_template, Response, jsonify, make_response)
+from fontTools import subset
+from fontTools.ttLib import TTFont
 
 app = Flask(__name__)
 app.debug = True
@@ -114,16 +116,15 @@ def fontcss():
             fontpath=font_filepath,
             exportpath=export_filepath)
 
-        fontforge = Popen(
-            "fontforge -lang=py -script",
-            shell=True, stdin=PIPE, stdout=PIPE)
-        fontforge.stdin.write(script)
-        fontforge.stdin.close()
-        fontforge.wait()
-
-        fontforge_stdout = fontforge.stdout.read()
-        fontforge.stdout.close()
-        font_familyname = fontforge_stdout.split('\n')[0]
+        subset.main([
+            font_filepath,
+            "--output-file=%s" % export_filepath,
+            "--flavor=woff",
+            "--text=%s" % json_data['text'],
+            "--name-IDs=''",
+            "--no-name-legacy"
+        ])
+        font_familyname = TTFont(font_filepath)["name"].names[1]
 
         export_data = open(export_filepath).read()
         export_base64 = base64.b64encode(export_data)

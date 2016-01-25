@@ -4,7 +4,7 @@
   "website": "https://japont.herokuapp.com/",
   "success_url": "/",
   "env": {
-    "BUILDPACK_URL": "https://github.com/heroku/heroku-buildpack-multi.git",
+    "BUILDPACK_URL": "https://github.com/heroku/heroku-buildpack-python.git",
     "TZ": "Asia/Tokyo"
   }
 }
