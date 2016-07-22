@@ -208,10 +208,10 @@ def ping_me():
     return
 
 # config
-app.config['owner'] = u'3846masa'
+app.config['owner'] = os.environ.get('PUBLISHER', u'Anonymous')
 app.config['root_dir'] = dirname(__file__)
 app.config['font_list'] = load_font_list()
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
+    port = int(os.environ.get('PORT', 8000))
     app.run(host='0.0.0.0', port=port)
