@@ -9,13 +9,13 @@ Dynamic Subsetting System for Japanese fonts.
 
 サンプルサイトは[こちら](https://japont.herokuapp.com)
 
+**==調整中==**
+
 まずは，自分専用の配信サーバを作りましょう．
 
-<del>[Heroku](https://www.heroku.com/)を使って無料で作れます．</del>
+~~[Heroku](https://www.heroku.com/)を使って無料で作れます．~~
 
-<del>[![Deploy](https://www.herokucdn.com/deploy/button.png)](#)</del>
-
-**==調整中==**
+~~[![Deploy](https://www.herokucdn.com/deploy/button.png)](#)~~
 
 そしたら，立ち上がったサーバにアクセスしましょう．
 
@@ -41,10 +41,13 @@ document.head.appendChild(webFont);
 ```
 
 ## LICENSE
+
 Apply the Apache License version 2.0.
-Apache License version 2.0を適用します．
+
+Apache License version 2.0を適用します
 
 -----------------------
+
 Copyright 2015- 3846masa
 
 ## Fonts
@@ -53,6 +56,7 @@ Copyright 2015- 3846masa
 
 
 ## 改善点他
+
 - 読み込みが遅い
   - Herokuのスペックが低い
 
