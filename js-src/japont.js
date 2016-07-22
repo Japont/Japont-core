@@ -75,7 +75,7 @@ class HTMLJapontElement extends HTMLElement {
       targetNodes.map((el) => el.textContent).join('').replace(/[\r\n]/g, '');
     const charArr = this._uniqueChars(content);
 
-    fetch('//{{HEROKU_URL}}/font.css', {
+    fetch('//{{HOST}}/font.css', {
       method: 'POST',
       mode: 'cors',
       headers: {

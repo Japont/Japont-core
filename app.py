@@ -25,8 +25,7 @@ dotenv.load_dotenv(env_file)
 
 @app.before_request
 def before_request():
-    if not os.environ.has_key('HEROKU_URL'):
-        os.environ['HEROKU_URL'] = request.headers['HOST']
+    if os.environ.has_key('HEROKU_URL'):
         dotenv.set_key(env_file, 'HEROKU_URL', os.environ['HEROKU_URL'])
         t = threading.Thread(target=ping_me)
         t.start()
@@ -36,8 +35,11 @@ def before_request():
 def index():
     response = make_response(render_template(
       'index.html',
-      HEROKU_URL=os.environ['HEROKU_URL']))
-    if (os.environ['HEROKU_URL']) != 'japont.herokuapp.com':
+      HOST=request.headers['HOST']))
+    if (
+        not os.environ.has_key('HEROKU_URL') or
+        (os.environ['HEROKU_URL']) != 'japont.herokuapp.com'
+    ):
         response.headers['X-Robots-Tag'] = 'noindex, nofollow';
     return response
 
@@ -47,7 +49,7 @@ def index():
 def library_js():
     response = make_response(render_template(
       os.path.basename(request.path),
-      HEROKU_URL=os.environ['HEROKU_URL']))
+      HOST=request.headers['HOST']))
     response.headers['Content-Type'] = "application/javascript"
     return response
 

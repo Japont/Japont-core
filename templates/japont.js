@@ -9,7 +9,7 @@
 /**
  * THIS SCRIPT IS DEPRECATED
  */
-console.warn('This Japont script is deprecated. See http://{{HEROKU_URL}}.');
+console.warn('This Japont script is deprecated. See https://{{HOST}}.');
 
 window.Japont = {};
 
@@ -121,7 +121,7 @@ function _sendRequest(fontname, selector, alias) {
   var charArr = _uniqueChars(content);
 
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', '//{{HEROKU_URL}}/font.css');
+  xhr.open('POST', '//{{HOST}}/font.css');
   xhr.onload = _embedFontCSS;
   xhr.send(JSON.stringify({
     text       : charArr.join(''),

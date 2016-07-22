@@ -8,7 +8,7 @@
     <meta property="og:title" content="Japont - 美しい日本語をウェブサイトに"/>
     <meta property="og:type" content="website"/>
     <meta property="og:description" content="ウェブサイトで日本語フォントを使おう．日本語WebフォントのダイナミックサブセッティングOSS．"/>
-    <meta property="og:url" content="https://{{HEROKU_URL}}"/>
+    <meta property="og:url" content="https://{{HOST}}"/>
     <meta property="og:site_name" content="Japont - 美しい日本語をウェブサイトに"/>
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
@@ -91,7 +91,7 @@ It's a small world.</pre>
             <div style="display: none;">
               &lt;!-- https://github.com/WebComponents/webcomponentsjs/#&nbsp;--&gt;
               &lt;script src="//cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.6.0/CustomElements.min.js"&gt;&lt;/script&gt;
-              &lt;script src="//{{HEROKU_URL}}/japont.min.js"&nbsp;async&gt;&lt;/script&gt;
+              &lt;script src="//{{HOST}}/japont.min.js"&nbsp;async&gt;&lt;/script&gt;
               &lt;!-- 変更したいDOMのCSSセレクタをselectorとして指定する --&gt;
               &lt;!-- 例）h1に適応させたい --&gt;
               &lt;japont-config src="{fontSrc}" selector="h1"&gt;&lt;/japont-config&gt;
