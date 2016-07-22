@@ -1,0 +1,10 @@
+main:
+  build: .
+  volumes:
+    - "/data/japont-fonts:/japont/fonts"
+  # ports:
+  #  - "8000:8000"
+  environment:
+    PUBLISHER: 3846masa
+    VIRTUAL_HOST: japont.example.com
+    VIRTUAL_PORT: 8000
