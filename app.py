@@ -9,6 +9,7 @@ from datetime import datetime
 from subprocess import Popen, PIPE
 from flask import (
   Flask, request, render_template, Response, jsonify, make_response)
+from flask.ext.cors import cross_origin
 from fontTools import subset
 from fontTools.ttLib import TTFont
 
@@ -41,22 +42,23 @@ def index():
     return response
 
 @app.route('/japont.js')
+@cross_origin()
 def library_js():
     response = make_response(render_template(
       'japont.js',
       HEROKU_URL=os.environ['HEROKU_URL']))
     response.headers['Content-Type'] = "application/javascript"
-    response.headers['Access-Control-Allow-Origin'] = "*"
     return response
 
 @app.route('/fontlist.json')
+@cross_origin()
 def fontlist():
     response = make_response(jsonify(**app.config['font_list']))
     response.headers['Content-Type'] = "application/javascript"
-    response.headers['Access-Control-Allow-Origin'] = "*"
     return response
 
 @app.route('/font.css', methods=['POST'])
+@cross_origin()
 def fontcss():
     try:
         json_data = json.loads(request.data)
@@ -170,17 +172,14 @@ def fontcss():
     except ValueError:
         response = Response()
         response.status_code = 400
-        response.headers['Access-Control-Allow-Origin'] = "*"
         return response
     except IOError:
         response = Response()
         response.status_code = 404
-        response.headers['Access-Control-Allow-Origin'] = "*"
         return response
     except Exception:
         response = Response()
         response.status_code = 500
-        response.headers['Access-Control-Allow-Origin'] = "*"
         return response
 
     response = make_response(render_template(
@@ -188,7 +187,6 @@ def fontcss():
       export_base64=export_base64,
       font_family=json_data['fontFamily'],
       license=license_comment))
-    response.headers['Access-Control-Allow-Origin'] = "*"
 
     return response
 
