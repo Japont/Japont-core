@@ -168,6 +168,8 @@ def fontcss():
             year=datetime.today().year,
             owner=app.config['owner'],
             font_url=font_origin_url,
+            url_form="%sfont.css" % request.url_root,
+            font_filename=font_filename,
             text=json_data['text'])
 
     except ValueError:
