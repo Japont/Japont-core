@@ -30,11 +30,11 @@ Dynamic Subsetting System for Japanese fonts.
 <!-- https://github.com/WebComponents/webcomponentsjs/# -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.6.0/CustomElements.min.js"></script>
 <script src="//{HOST}/japont.js"></script>
-<meta is="web-font" src="mplus/mplus-1p-light.woff" selector="*" alias="mplus"/>
+<japont-config src="mplus/mplus-1p-light.woff" selector="*" alias="mplus"/>
 ```
 
 ```js
-var webFont = document.createElement('meta', 'web-font');
+var webFont = document.createElement('japont-config');
 webFont.setAttribute('src', 'mplus/mplus-ip-light.woff');
 webFont.setAttribute('selector', '#any-id');
 document.head.appendChild(webFont);
