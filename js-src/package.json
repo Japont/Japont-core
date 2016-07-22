@@ -7,6 +7,9 @@
       "babelify"
     ]
   },
+  "dependencies": {
+    "whatwg-fetch": "1.0.0"
+  },
   "devDependencies": {
     "babel-core": "6.11.4",
     "babel-plugin-add-module-exports": "0.2.1",
@@ -27,7 +30,7 @@
     "uglifyify": "3.0.2",
     "watchify": "3.7.0"
   },
-  "license": "MIT",
+  "license": "Apache-2.0",
   "main": "japont.js",
   "scripts": {
     "build": "npm-run-all build:browserify",
@@ -36,8 +39,5 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "npm-run-all watch:browserify",
     "watch:browserify": "watchify -vd -p licensify -p [ minifyify --map japont.min.js.map --output japont.min.js.map --uglify [ --mangle --compress ] ] -e japont.js -o ../templates/japont.min.js"
-  },
-  "dependencies": {
-    "whatwg-fetch": "1.0.0"
   }
 }
