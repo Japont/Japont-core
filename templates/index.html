@@ -3,7 +3,7 @@
   <head prefix="og: http://ogp.me/ns# website: http://ogp.me/ns/website#">
     <meta charset="utf-8"/>
     <title>Japont - 美しい日本語をウェブサイトに</title>
-    
+
     <meta name="description" content="ウェブサイトで日本語フォントを使おう．日本語WebフォントのダイナミックサブセッティングOSS．"/>
     <meta property="og:title" content="Japont - 美しい日本語をウェブサイトに"/>
     <meta property="og:type" content="website"/>
@@ -19,10 +19,10 @@
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.6.0/CustomElements.min.js"></script>
 
-    <script src="/japont.js" async></script>
-    <meta is="web-font" src="honoka-mincho/honoka-mincho.woff" selector="h1"/>
-    <meta is="web-font" src="" selector="#sampleCode, #sampleCode code" id="sampleCodeFont"/>
-    <meta is="web-font" src="" selector="#testText" id="testFont"/>
+    <script src="/japont.min.js" async></script>
+    <japont-config src="honoka-mincho/honoka-mincho.woff" selector="h1"/>
+    <japont-config src="" selector="#sampleCode, #sampleCode code" id="sampleCodeFont"/>
+    <japont-config src="" selector="#testText" id="testFont"/>
     <script src="/static/script.js"></script>
     <style>
       .btn {
@@ -91,10 +91,10 @@ It's a small world.</pre>
             <div style="display: none;">
               &lt;!-- https://github.com/WebComponents/webcomponentsjs/#&nbsp;--&gt;
               &lt;script src="//cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.6.0/CustomElements.min.js"&gt;&lt;/script&gt;
-              &lt;script src="//{{HEROKU_URL}}/japont.js"&nbsp;async&gt;&lt;/script&gt;
+              &lt;script src="//{{HEROKU_URL}}/japont.min.js"&nbsp;async&gt;&lt;/script&gt;
               &lt;!-- 変更したいDOMのCSSセレクタをselectorとして指定する --&gt;
               &lt;!-- 例）h1に適応させたい --&gt;
-              &lt;meta is="web-font" src="{fontSrc}" selector="h1"/&gt;
+              &lt;japont-config src="{fontSrc}" selector="h1"&gt;&lt;/japont-config&gt;
             </div>
           </pre>
         </div>

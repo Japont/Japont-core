@@ -42,10 +42,11 @@ def index():
     return response
 
 @app.route('/japont.js')
+@app.route('/japont.min.js')
 @cross_origin()
 def library_js():
     response = make_response(render_template(
-      'japont.js',
+      os.path.basename(request.path),
       HEROKU_URL=os.environ['HEROKU_URL']))
     response.headers['Content-Type'] = "application/javascript"
     return response

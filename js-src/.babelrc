@@ -1,0 +1,13 @@
+{
+  "presets": [ "es2015" ],
+  "plugins": [
+    [
+      "transform-builtin-extend",
+      {
+        "globals": [ "HTMLElement" ]
+      }
+    ],
+    "transform-runtime",
+    "add-module-exports"
+  ]
+}

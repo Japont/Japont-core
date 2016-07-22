@@ -6,9 +6,14 @@
 
 (function() {
 
+/**
+ * THIS SCRIPT IS DEPRECATED
+ */
+console.warn('This Japont script is deprecated. See http://{{HEROKU_URL}}.');
+
 window.Japont = {};
 
-var DOMLoaded = 
+var DOMLoaded =
   (document.readyState === "interactive" ||
    document.readyState === "complete");
 
@@ -136,7 +141,7 @@ function _sendRequest(fontname, selector, alias) {
 
     if (callerElem.fontElement != null)
       callerElem.fontElement.parentNode.removeChild(callerElem.fontElement);
-    
+
     callerElem.fontName = xhr.responseText.split('\n')[1];
     var fontNode = document.createElement('style');
     var textNode = document.createTextNode(xhr.responseText);
@@ -173,7 +178,7 @@ function _setFont(alias, selector) {
       fontCss.replace(/font-family: '[^']*'/, "font-family: '" + alias + "'")
     this.fontElement.textContent = fontCss;
   }
-  
+
   var styleText = selector + "{ font-family : \"" + alias + "\"; }";
   var styleNode = document.createElement('style');
   var textNode = document.createTextNode(styleText);
