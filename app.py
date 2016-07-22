@@ -1,7 +1,7 @@
 #! python
 # coding: utf-8
 
-import os, re, sys, time, random, json, base64, yaml, threading, httplib, dotenv
+import os, re, sys, time, random, json, base64, yaml, threading, httplib, dotenv, glob
 from os import path, listdir, remove
 from os.path import relpath, isfile, exists, abspath, dirname, basename
 from glob import glob
@@ -192,10 +192,10 @@ def fontcss():
     return response
 
 def load_font_list():
-    font_dirs = listdir(path.join(app.config['root_dir'], 'fonts'))
+    font_dirs = glob(path.join(app.config['root_dir'], 'fonts/[!.]*'))
     font_list = {}
-    for dirname in font_dirs:
-        dirpath = path.join(app.config['root_dir'], 'fonts', dirname)
+    for dirpath in font_dirs:
+        dirname = path.basename(dirpath)
         font_list[dirname] = [relpath(x, dirpath) for x in glob(path.join(dirpath, '*')) if re.search(r"\.(ttf|woff)$", x)]
         font_list[dirname].sort()
     return font_list
