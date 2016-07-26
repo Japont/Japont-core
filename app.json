@@ -8,6 +8,10 @@
       "description": "",
       "value": "https://github.com/3846masa/japont-fonts.git"
     },
+    "FONTS_GIT_BRANCH": {
+      "description": "",
+      "value": "master"
+    },
     "TZ": {
       "description": "",
       "value": "Asia/Tokyo"
