@@ -199,6 +199,8 @@ def load_font_list():
     font_dirs = glob(path.join(app.config['root_dir'], 'fonts/[!.]*'))
     font_list = {}
     for dirpath in font_dirs:
+        if not path.isdir(dirpath):
+            continue
         dirname = path.basename(dirpath)
         font_list[dirname] = [relpath(x, dirpath) for x in glob(path.join(dirpath, '*')) if re.search(r"\.(ttf|woff)$", x)]
         font_list[dirname].sort()
