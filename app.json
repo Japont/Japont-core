@@ -12,6 +12,10 @@
       "description": "",
       "value": "master"
     },
+    "PUBLISHER": {
+      "description": "SET YOUR NAME",
+      "value": "Anonymous"
+    },
     "TZ": {
       "description": "",
       "value": "Asia/Tokyo"
