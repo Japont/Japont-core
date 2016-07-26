@@ -4,7 +4,29 @@
   "website": "https://japont.herokuapp.com/",
   "success_url": "/",
   "env": {
-    "BUILDPACK_URL": "https://github.com/heroku/heroku-buildpack-python.git",
-    "TZ": "Asia/Tokyo"
-  }
+    "FONTS_GIT_URL": {
+      "description": "",
+      "value": "https://github.com/3846masa/japont-fonts.git"
+    },
+    "FONTS_GIT_BRANCH": {
+      "description": "",
+      "value": "master"
+    },
+    "PUBLISHER": {
+      "description": "SET YOUR NAME",
+      "value": "Anonymous"
+    },
+    "TZ": {
+      "description": "",
+      "value": "Asia/Tokyo"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "https://github.com/3846masa/heroku-buildpack-run.git"
+    },
+    {
+      "url": "heroku/python"
+    }
+  ]
 }
