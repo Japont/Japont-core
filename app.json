@@ -3,9 +3,6 @@
   "description": "Dynamic Subsetting System for Japanese fonts.",
   "website": "https://japont.herokuapp.com/",
   "success_url": "/",
-  "scripts": {
-    "postdeploy": "git clone --depth=1 $FONTS_GIT_URL fonts"
-  },
   "env": {
     "FONTS_GIT_URL": {
       "description": "",
@@ -17,6 +14,9 @@
     }
   },
   "buildpacks": [
+    {
+      "url": "https://github.com/3846masa/heroku-buildpack-run.git"
+    },
     {
       "url": "heroku/python"
     }
