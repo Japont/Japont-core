@@ -3,8 +3,21 @@
   "description": "Dynamic Subsetting System for Japanese fonts.",
   "website": "https://japont.herokuapp.com/",
   "success_url": "/",
+  "scripts": {
+    "postdeploy": "git clone --depth=1 $FONTS_GIT_URL fonts"
+  },
   "env": {
-    "BUILDPACK_URL": "https://github.com/heroku/heroku-buildpack-python.git",
-    "TZ": "Asia/Tokyo"
-  }
+    "FONTS_GIT_URL": {
+      "description": "",
+      "value": "https://github.com/3846masa/japont-fonts.git"
+    },
+    "TZ": {
+      "description": "",
+      "value": "Asia/Tokyo"
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ]
 }
