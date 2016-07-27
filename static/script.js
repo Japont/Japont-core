@@ -50,7 +50,7 @@
       if (xhr.status !== 200) return;
       $('#sampleCode > div').textContent += xhr.responseText;
       $('#sampleCodeFont').setAttribute(
-        'src', 'RictyDiminished/RictyDiminished-Regular.woff');
+        'src', 'ricty-diminished/RictyDiminished-Regular.woff');
 
       fontlist = JSON.parse(xhr.responseText);
 
