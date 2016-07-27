@@ -1,6 +1,8 @@
 /* globals HTMLElement:false, fetch:false, ErrorEvent:false, Event:false */
 import isReady from './lib/is-ready';
+import { polyfill as promisePolyfill } from 'es6-promise';
 import 'whatwg-fetch';
+promisePolyfill();
 
 class HTMLJapontElement extends HTMLElement {
   createdCallback () {
