@@ -1,4 +1,4 @@
-/* globals HTMLElement:false, fetch:false */
+/* globals HTMLElement:false, fetch:false, ErrorEvent:false, Event:false */
 import isReady from './lib/is-ready';
 import 'whatwg-fetch';
 
@@ -68,7 +68,9 @@ class HTMLJapontElement extends HTMLElement {
       : Array.from(document.querySelectorAll(selector));
 
     if (!targetNodes || targetNodes.length === 0) {
-      throw new Error(`Selector "${selector}" is not matched.`);
+      const err = new Error(`Selector "${selector}" is not matched.`);
+      this._emit('error', err);
+      throw err;
     }
 
     const content =
@@ -88,9 +90,9 @@ class HTMLJapontElement extends HTMLElement {
       })
     }).then((res) => {
       if (res.status !== 200) {
-        this._emit('error');
-        const _err = new Error(`Can't read font file : ${res.statusText}`);
-        return Promise.reject(_err);
+        const err = new Error(`Can't read font file. : ${res.statusText}`);
+        this._emit('error', err);
+        return Promise.reject(err);
       }
       return res.text();
     })
@@ -133,10 +135,20 @@ class HTMLJapontElement extends HTMLElement {
     this.appendChild(styleNode);
   }
 
-  _emit (eventName) {
-    const ev = document.createEvent('HTMLEvents');
-    ev.initEvent(eventName, false, false);
-    this.dispatchEvent(ev);
+  _emit (eventName, error) {
+    if (eventName === 'error') {
+      const ev = new ErrorEvent('error', {
+        error: error,
+        message: error.message
+      });
+      this.dispatchEvent(ev);
+    } else {
+      const ev = new Event(eventName, {
+        bubbles: false,
+        cancelable: false
+      });
+      this.dispatchEvent(ev);
+    }
   }
 
   _uniqueChars (str) {
