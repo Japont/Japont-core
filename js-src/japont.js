@@ -118,11 +118,11 @@ class HTMLJapontElement extends HTMLElement {
 
   _setFont (alias, selector) {
     if (this.fontElement) {
-      let fontCss = this.fontElement.textContent;
+      const fontCss = this.fontElement.textContent;
       alias = alias || this.fontName || 'undefined';
-      fontCss =
+      const newFontCss =
         fontCss.replace(/font-family: '[^']*'/, `font-family: '${alias}'`);
-      this.fontElement.textContent = fontCss;
+      this.fontElement.textContent = newFontCss;
     }
 
     if (this.styleElement) {
@@ -155,8 +155,8 @@ class HTMLJapontElement extends HTMLElement {
 
   _uniqueChars (str) {
     const arr = str.split('');
-    let o = {};
-    let l = arr.length;
+    const o = {};
+    const l = arr.length;
     for (let i = 0; i < l; i++) {
       o[arr[i]] = 1;
     }
