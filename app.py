@@ -15,8 +15,7 @@ from flask_cors import CORS
 # Init
 logger = getLogger(__name__)
 app = Flask(__name__, static_url_path='')
-cors = CORS(app, intercept_exceptions=False, max_age=31536000,
-            resources={r'/api/*': {}}, expose_headers=['ETag'])
+cors = CORS(app, intercept_exceptions=False, resources={r'/api/*': {}})
 
 
 @app.route('/')
