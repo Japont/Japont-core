@@ -27,7 +27,7 @@ def root():
 @app.route('/api/fonts', methods=['GET'])
 def get_font_list():
     response = make_response(
-        jsonify(**app.config['font_list']))
+        jsonify(app.config['font_list']))
     return response
 
 

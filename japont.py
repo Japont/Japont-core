@@ -17,17 +17,16 @@ jinja2_env = Environment(
 
 def load_font_list(root_dir):
     dirs = glob(path.join(root_dir, '[!.]*'))
-    font_list = {}
+    font_list = []
     for dir_path in dirs:
         if not path.isdir(dir_path):
             continue
-        dir_name = path.basename(dir_path)
-        font_list[dir_name] = [
-            path.relpath(x, dir_path)
+        font_list.extend([
+            path.relpath(x, root_dir)
             for x in glob(path.join(dir_path, '*'))
             if re.search(r'\.(ttf|woff)$', x)
-        ]
-        font_list[dir_name].sort()
+        ])
+    font_list.sort()
     return font_list
 
 
