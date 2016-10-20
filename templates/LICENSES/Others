@@ -1,0 +1,11 @@
+{{export_name}}
+Copyright {{year}} {{owner}}
+
+このフォントは "{{original_name}}" を改変して作られました．
+This font was created by modifying "{{original_name}}".
+
+---------------------------------------------------------
+
+** License of original font **
+
+{{license}}

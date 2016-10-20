@@ -1,0 +1,29 @@
+{{export_name}}
+Copyright {{year}} {{owner}}
+
+このフォントは， IPAフォントライセンス の下に配布されています．
+IPAフォントライセンス第3条1項に基づき，以下の情報を提供します．
+
+元となったフォント名： "{{original_name}}"
+元となったフォントの配布場所： {{url}}
+改変内容： 収録されているフォントデータの削減
+改変フォントの入手方法：
+次のURLに，送信JSONデータをPOSTメソッドで，送信してください．
+{{form_url}}
+送信JSONデータ：
+{{request_data}}
+
+=========================================================
+
+{{export_name}}
+Copyright {{year}} {{owner}}
+
+This font software is licensed under the IPA Font License.
+
+Please read Japanese message above.
+
+---------------------------------------------------------
+
+** License of original font **
+
+{{license}}
