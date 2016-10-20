@@ -128,10 +128,10 @@ def add_x_robots_tag(response):
     return response
 
 # config
-app.config['owner'] = environ.get('PUBLISHER', 'Anonymous')
+app.config['owner'] = environ.get('SERVER_OWNER', 'Anonymous')
 app.config['root_dir'] = path.dirname(__file__)
-app.config['fonts_dir'] = abspath(
-    path.join(app.config['root_dir'], environ.get('FONTS_PATH', './fonts')))
+app.config['fonts_dir'] = abspath(path.join(
+    app.config['root_dir'], environ.get('FONTS_DIR_PATH', './fonts')))
 app.config['font_list'] = japont.load_font_list(app.config['fonts_dir'])
 app.config['server_updated_date'] = hex(int(time()))[2:]
 

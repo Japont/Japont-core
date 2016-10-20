@@ -18,6 +18,19 @@ Dynamic Subsetting System for Japanese fonts.
 
 **WIP**
 
+### Environment variables
+
+| ENVS                   | Default             | Note                        |
+|:-----------------------|:--------------------|:----------------------------|
+| `X_ROBOTS_TAG`         | `noindex, nofollow` | [X-Robots-Tag] Header       |
+| `SERVER_OWNER`         | `Anonymous`         | Server owner's name         |
+| `FONTS_DIR_PATH`       | `./fonts`           | Folder path where fonts are |
+| `ZIP_COMPRESSION_TYPE` | `ZIP_STORED`        |                             |
+| `BIND_IP`              | `0.0.0.0`           |                             |
+| `PORT`                 | `8000`              |                             |
+
+[X-Robots-Tag]: https://developers.google.com/webmasters/control-crawl-index/docs/robots_meta_tag
+
 ## Contribution
 
 1. Fork it ( http://github.com/Japont/Japont-core/fork )
