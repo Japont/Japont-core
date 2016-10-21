@@ -1,10 +1,18 @@
 # Japont
 
-Dynamic Subsetting System for Japanese fonts.
+Dynamic Subsetting System for CJK fonts.
 
-日本語フォントをWebフォントとして軽量化して配信するために，動的に必要文字グリフを抽出したフォントを生成するシステム
+フォントを軽量化して配信するために，動的に必要文字を抽出したWebフォントを生成するシステム
 
-比較的簡単に日本語フォントを導入できます
+比較的簡単に日本語Webフォントを導入できます
+
+## ⚠️ Notice
+
+This branch is under developing.
+
+If you use Japont, please access [with-fonttools branch].
+
+[with-fonttools branch]: https://github.com/Japont/Japont-core/tree/with-fonttools
 
 ## DEMO
 
