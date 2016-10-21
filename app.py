@@ -30,7 +30,7 @@ def get_font_list():
     return response
 
 
-@app.route('/api/font/<path:font_path>', methods=['POST'])
+@app.route('/api/fonts/<path:font_path>', methods=['POST'])
 def generate_font_zip(font_path):
     # valid check
     if not request.data:
