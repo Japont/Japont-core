@@ -57,4 +57,7 @@ Copyright 2015- 3846masa
 
 ## Author
 
-![3846masa](http://gravatar.com/avatar/cfeae69aae4f4fc102960f01d35d2d86?s=25) 3846masa
+[![3846masa][3846masa icon] 3846masa][3846masa]
+
+[3846masa icon]: http://gravatar.com/avatar/cfeae69aae4f4fc102960f01d35d2d86?s=25
+[3846masa]: https://github.com/3846masa
