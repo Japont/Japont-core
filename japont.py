@@ -15,16 +15,19 @@ jinja2_env = Environment(
     loader=FileSystemLoader(path.join(path.dirname(__file__), 'templates')))
 
 
-def load_font_list(root_dir):
-    dirs = glob(path.join(root_dir, '[!.]*'))
+def load_font_list(search_dir, root_dir=None):
+    if root_dir is None:
+        root_dir = search_dir
+    dirs = glob(path.join(search_dir, '[!.]*'))
     font_list = []
     for dir_path in dirs:
         if not path.isdir(dir_path):
             continue
+        font_list.extend(load_font_list(dir_path, root_dir))
         font_list.extend([
             path.relpath(x, root_dir)
             for x in glob(path.join(dir_path, '*'))
-            if re.search(r'\.(ttf|woff)$', x)
+            if re.search(r'\.(ttf|woff|otf)$', x)
         ])
     font_list.sort()
     return font_list
@@ -52,9 +55,9 @@ def generate_license(
     request_data, url_root, owner
 ):
     font_dir = path.dirname(font_path)
-    config_filepath = path.join(font_dir, 'config.yaml')
+    config_filepath = path.join(font_dir, 'info.yml')
     if not path.isfile(config_filepath):
-        raise Exception()
+        raise Exception('{} is not found.'.format(config_filepath))
 
     fd = open(config_filepath, 'r')
     config = yaml.safe_load(fd)
@@ -62,13 +65,13 @@ def generate_license(
 
     if not (
         'license' in config and
-        'filename' in config['license'] and
+        'files' in config['license'] and
         'type' in config['license']
     ):
-        raise Exception()
+        raise Exception('license section is not set completely.')
 
     license_text = ''
-    for license_file in config['license']['filename']:
+    for license_file in config['license']['files']:
         license_file_path = path.join(font_dir, license_file)
         license_text += "\n" + open(license_file_path, 'r').read()
         license_text += "\n----------------------------\n"

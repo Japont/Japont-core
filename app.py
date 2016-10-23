@@ -1,5 +1,6 @@
 #! python3
 
+import re
 import zipfile
 from io import BytesIO
 from logging import getLogger
@@ -30,14 +31,24 @@ def get_font_list():
     return response
 
 
-@app.route('/api/fonts/<path:font_path>', methods=['POST'])
-def generate_font_zip(font_path):
+@app.route('/api/fonts/<path:request_font_path>', methods=['POST'])
+def generate_font_zip(request_font_path):
     # valid check
     if not request.data:
         raise ValueError()
 
+    # search font
+    font_path = [
+        font
+        for font in app.config['font_list']
+        if re.search(
+            r'{0}\.(ttf|woff|otf)$'.format(re.escape(request_font_path)), font)
+    ]
+    if len(font_path) == 0:
+        raise IOError('Font is not found.')
+
     request_data = {
-        'file_path': font_path,
+        'file_path': font_path[0],
         'text': request.data.decode('utf-8'),
     }
 
@@ -47,9 +58,9 @@ def generate_font_zip(font_path):
 
     # valid check
     if not (basefile_path.find(app.config['fonts_dir']) == 0):
-        raise ValueError()
+        raise ValueError('Path is invalid.')
     if not path.isfile(basefile_path):
-        raise IOError()
+        raise IOError('Font is not found.')
 
     # create fontname
     export_familyname = japont.generate_fontname()
