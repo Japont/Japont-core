@@ -7,7 +7,7 @@ from glob import glob
 from os import path
 
 import yaml
-from fontTools import subset
+from fontTools.subset import Options, Subsetter, load_font, save_font
 from fontTools.ttLib import TTFont
 from jinja2 import Environment, FileSystemLoader
 
@@ -38,15 +38,20 @@ def generate_fontname():
     return name
 
 
-def subset_font(basefile_path, exportfile_path, text):
-    subset.main([
-        basefile_path,
-        "--output-file={}".format(exportfile_path),
-        "--flavor=woff",
-        "--text={}".format(text),
-        "--name-IDs=''",
-        "--no-name-legacy"
-    ])
+def subset_font(basefile_path, buff, text):
+    options = Options()
+    options.name_IDs = []
+    options.obfuscate_names = True
+    options.flavor = 'woff'
+
+    font = load_font(basefile_path, options)
+    subsetter = Subsetter(options=options)
+    subsetter.populate(text=text)
+    subsetter.subset(font)
+    save_font(font, buff, options)
+
+    font.close()
+    buff.seek(0)
     return
 
 

@@ -4,7 +4,7 @@ import re
 import zipfile
 from io import BytesIO
 from logging import getLogger
-from os import environ, path, remove
+from os import environ, path
 from os.path import abspath
 from time import time
 from zipfile import ZipFile
@@ -66,13 +66,14 @@ def generate_font_zip(request_font_path):
     export_familyname = japont.generate_fontname()
 
     export_filename = '{}.woff'.format(export_familyname)
-    export_path = path.join('/tmp', export_filename)
 
     # subsetting
-    japont.subset_font(
-        basefile_path=basefile_path,
-        exportfile_path=export_path,
-        text=request_data['text'])
+    with BytesIO() as font_buff:
+        japont.subset_font(
+            basefile_path=basefile_path,
+            buff=font_buff,
+            text=request_data['text'])
+        font_bytes = font_buff.getvalue()
 
     # make license
     license = japont.generate_license(
@@ -86,12 +87,11 @@ def generate_font_zip(request_font_path):
     zip_buff = BytesIO()
     zip_archive = \
         ZipFile(zip_buff, mode='w', compression=app.config['zip_compression'])
-    zip_archive.write(export_path, arcname=export_filename)
+    zip_archive.writestr(export_filename, font_bytes)
     zip_archive.writestr('LICENSE', license)
     zip_archive.close()
-    remove(export_path)
-
     zip_buff.seek(0)
+
     response = send_file(
         zip_buff,
         mimetype='application/zip',
