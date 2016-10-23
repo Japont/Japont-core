@@ -116,6 +116,7 @@ def api_path_not_found(path):
 
 @app.errorhandler(ValueError)
 def handle_invalid_value(error):
+    logger.exception(error)
     response = jsonify(error='Invalid value')
     response.status_code = 400
     return response
@@ -123,6 +124,7 @@ def handle_invalid_value(error):
 
 @app.errorhandler(IOError)
 def handle_not_found(error):
+    logger.exception(error)
     response = jsonify(error='Not found')
     response.status_code = 404
     return response
