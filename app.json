@@ -6,11 +6,11 @@
   "env": {
     "FONTS_GIT_URL": {
       "description": "",
-      "value": "https://github.com/3846masa/japont-fonts.git"
+      "value": "https://github.com/Japont/Japont-fonts.git"
     },
     "FONTS_GIT_BRANCH": {
       "description": "",
-      "value": "master"
+      "value": "v0.x"
     },
     "PUBLISHER": {
       "description": "SET YOUR NAME",
