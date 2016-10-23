@@ -26,8 +26,11 @@ def root():
 
 @app.route('/api/fonts', methods=['GET'])
 def get_font_list():
-    response = make_response(
-        jsonify(app.config['font_list']))
+    font_list = [
+        path.splitext(font_path)[0]
+        for font_path in app.config['font_list']
+    ]
+    response = make_response(jsonify(font_list))
     return response
 
 
@@ -38,11 +41,12 @@ def generate_font_zip(request_font_path):
         raise ValueError()
 
     # search font
+    font_path_regexp = \
+        r'(^|\/){}\.(ttf|woff|otf)$'.format(re.escape(request_font_path))
     font_path = [
         font
         for font in app.config['font_list']
-        if re.search(
-            r'{0}\.(ttf|woff|otf)$'.format(re.escape(request_font_path)), font)
+        if re.search(font_path_regexp, font)
     ]
     if len(font_path) == 0:
         raise IOError('Font is not found.')

@@ -25,9 +25,9 @@ def load_font_list(search_dir, root_dir=None):
             continue
         font_list.extend(load_font_list(dir_path, root_dir))
         font_list.extend([
-            path.relpath(re.sub(r'\.(ttf|woff|otf)$', '', x), root_dir)
-            for x in glob(path.join(dir_path, '*'))
-            if re.search(r'\.(ttf|woff|otf)$', x)
+            path.relpath(filename, root_dir)
+            for filename in glob(path.join(dir_path, '*'))
+            if re.search(r'\.(ttf|woff|otf)$', filename)
         ])
     font_list.sort()
     return font_list
