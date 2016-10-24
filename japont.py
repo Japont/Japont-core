@@ -57,7 +57,7 @@ def subset_font(basefile_path, buff, text):
 
 def generate_license(
     font_path, export_familyname,
-    request_data, url_root, owner
+    request_data, post_url, owner
 ):
     font_dir = path.dirname(font_path)
     config_filepath = path.join(font_dir, 'info.yml')
@@ -90,8 +90,8 @@ def generate_license(
         original_name=TTFont(font_path)['name'].names[1],
         year=datetime.today().year,
         owner=owner,
-        url=config.get('url', ''),
-        form_url='{}/api/font'.format(url_root),
-        request=request_data)
+        url=config.get('website', ''),
+        post_url=post_url,
+        request_data=request_data)
 
     return license_comment

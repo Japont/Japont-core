@@ -84,7 +84,7 @@ def generate_font_zip(request_font_path):
         font_path=basefile_path,
         export_familyname=export_familyname,
         request_data=request_data['text'],
-        url_root=request.url_root,
+        post_url=request.base_url,
         owner=app.config['owner'])
 
     # make zip
