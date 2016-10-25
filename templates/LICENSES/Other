@@ -1,5 +1,6 @@
 {{export_name}}
-Copyright {{year}} {{owner}}
+Copyright (c) {{year}} {{owner}}
+{{copyrights}}
 
 このフォントは "{{original_name}}" を改変して作られました．
 This font was created by modifying "{{original_name}}".

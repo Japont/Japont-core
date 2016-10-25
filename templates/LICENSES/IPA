@@ -1,7 +1,8 @@
 {{export_name}}
-Copyright {{year}} {{owner}}
+Copyright (c) {{year}} {{owner}}
+{{copyrights}}
 
-このフォントは， IPAフォントライセンス の下に配布されています．
+このフォントは， IPAフォントライセンスv1.0 の下に配布されています．
 IPAフォントライセンス第3条1項に基づき，以下の情報を提供します．
 
 元となったフォント名： "{{original_name}}"
@@ -20,9 +21,10 @@ IPAフォントライセンス第3条1項に基づき，以下の情報を提供
 =========================================================
 
 {{export_name}}
-Copyright {{year}} {{owner}}
+Copyright (c) {{year}} {{owner}}
+{{copyrights}}
 
-This font software is licensed under the IPA Font License.
+This font software is licensed under the IPA Font License v1.0.
 
 Please read Japanese message above.
 

@@ -84,7 +84,16 @@ def generate_license(
     license_template = jinja2_env.get_template(
         path.join('./LICENSES', config['license']['type']))
 
+    if 'copyrights' in config:
+        copyrights = '\n'.join(config.get('copyrights'))
+    else:
+        copyrights = ''
+        for author in config.get('authors', []):
+            copyrights += \
+                'Copyright (c) {0} {1}\n'.format(datetime.today().year, author)
+
     license_comment = license_template.render(
+        copyrights=copyrights,
         license=license_text,
         export_name=export_familyname,
         original_name=TTFont(font_path)['name'].names[1],

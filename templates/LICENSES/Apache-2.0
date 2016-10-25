@@ -1,15 +1,17 @@
 {{export_name}}
-Copyright {{year}} {{owner}}
+Copyright (c) {{year}} {{owner}}
+{{copyrights}}
 
-このフォントは， Apache License に基づいてライセンスされます．
+このフォントは， Apache License version 2.0 に基づいてライセンスされます．
 詳しくは以下の英文を参照してください．
 
 =========================================================
 
 {{export_name}}
-Copyright {{year}} {{owner}}
+Copyright (c) {{year}} {{owner}}
+{{copyrights}}
 
-This font software is licensed under the Apache License.
+This font software is licensed under the Apache License version 2.0.
 
 This font was created by modifying "{{original_name}}".
 Modification: Subsetting.
