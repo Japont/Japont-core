@@ -1,28 +1,47 @@
-{{export_name}}
+# {{export_name}}
+```
 Copyright (c) {{year}} {{owner}}
 {{copyrights}}
+```
 
 このフォントは， IPAフォントライセンスv1.0 の下に配布されています．
 IPAフォントライセンス第3条1項に基づき，以下の情報を提供します．
 
-元となったフォント名： "{{original_name}}"
+## 元となったフォント名
+"{{original_name}}"
 
-元となったフォントの配布場所： {{url}}
+## 元となったフォントの配布場所
+{{url}}
 
-改変内容： 収録されているフォントデータの削減
+## 改変内容
+収録されているフォントデータの削減
 
-改変フォントの入手方法：
+## IPAの配布するフォントに置き換える手段
+1. IPAの配布するフォントをインストールします（http://ipafont.ipa.go.jp/）
+2. Web ページ上で JapontLoader が読み込まれている場合は，次のコマンドを実行します
+  ```
+  JapontLoader.alternate();
+  ```
+3. 読み込まれていない場合は，手動で font-family を設定します
+
+## 改変フォントの入手方法
 次のURLに，送信データをPOSTメソッドで，送信してください．
+
+### 送信先URL
 {{post_url}}
 
-送信データ：
+### 送信データ
+```
 {{request_data}}
+```
 
-=========================================================
+------------------------------------------------------------
 
-{{export_name}}
+# {{export_name}}
+```
 Copyright (c) {{year}} {{owner}}
 {{copyrights}}
+```
 
 This font software is licensed under the IPA Font License v1.0.
 
@@ -31,5 +50,7 @@ Please read Japanese message above.
 ---------------------------------------------------------
 
 ** License of original font **
-
+==============================
+```
 {{license}}
+```
