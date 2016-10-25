@@ -1,5 +1,6 @@
 #! python3
 
+import json
 import re
 import zipfile
 from io import BytesIO
@@ -79,13 +80,17 @@ def generate_font_zip(request_font_path):
             text=request_data['text'])
         font_bytes = font_buff.getvalue()
 
+    # info.json
+    font_info = japont.load_font_info(basefile_path)
+
     # make license
     license = japont.generate_license(
         font_path=basefile_path,
         export_familyname=export_familyname,
         request_data=request_data['text'],
         post_url=request.base_url,
-        owner=app.config['owner'])
+        owner=app.config['owner'],
+        font_info=font_info)
 
     # make zip
     zip_buff = BytesIO()
@@ -93,6 +98,7 @@ def generate_font_zip(request_font_path):
         ZipFile(zip_buff, mode='w', compression=app.config['zip_compression'])
     zip_archive.writestr(export_filename, font_bytes)
     zip_archive.writestr('LICENSE', license)
+    zip_archive.writestr('info.json', json.dumps(font_info))
     zip_archive.close()
     zip_buff.seek(0)
 

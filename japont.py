@@ -55,40 +55,46 @@ def subset_font(basefile_path, buff, text):
     return
 
 
-def generate_license(
-    font_path, export_familyname,
-    request_data, post_url, owner
-):
+def load_font_info(font_path):
     font_dir = path.dirname(font_path)
-    config_filepath = path.join(font_dir, 'info.yml')
-    if not path.isfile(config_filepath):
-        raise Exception('{} is not found.'.format(config_filepath))
+    info_filepath = path.join(font_dir, 'info.yml')
+    if not path.isfile(info_filepath):
+        raise Exception('{} is not found.'.format(info_filepath))
 
-    fd = open(config_filepath, 'r')
-    config = yaml.safe_load(fd)
+    fd = open(info_filepath, 'r')
+    info = yaml.safe_load(fd)
     fd.close()
 
+    return info
+
+
+def generate_license(
+    font_path, export_familyname,
+    request_data, post_url, owner, font_info
+):
+    font_dir = path.dirname(font_path)
+
     if not (
-        'license' in config and
-        'files' in config['license'] and
-        'type' in config['license']
+        'license' in font_info and
+        'files' in font_info['license'] and
+        'type' in font_info['license']
     ):
         raise Exception('license section is not set completely.')
 
     license_text = ''
-    for license_file in config['license']['files']:
+    for license_file in font_info['license']['files']:
         license_file_path = path.join(font_dir, license_file)
         license_text += "\n" + open(license_file_path, 'r').read()
         license_text += "\n----------------------------\n"
 
     license_template = jinja2_env.get_template(
-        path.join('./LICENSES', config['license']['type']))
+        path.join('./LICENSES', font_info['license']['type']))
 
-    if 'copyrights' in config:
-        copyrights = '\n'.join(config.get('copyrights'))
+    if 'copyrights' in font_info:
+        copyrights = '\n'.join(font_info.get('copyrights'))
     else:
         copyrights = ''
-        for author in config.get('authors', []):
+        for author in font_info.get('authors', []):
             copyrights += \
                 'Copyright (c) {0} {1}\n'.format(datetime.today().year, author)
 
@@ -99,7 +105,7 @@ def generate_license(
         original_name=TTFont(font_path)['name'].names[1],
         year=datetime.today().year,
         owner=owner,
-        url=config.get('website', ''),
+        url=font_info.get('website', ''),
         post_url=post_url,
         request_data=request_data)
 
