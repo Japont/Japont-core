@@ -33,6 +33,20 @@ def load_font_list(search_dir, root_dir=None):
     return font_list
 
 
+def search_font_path(request_font_path, font_list):
+    # search font
+    font_path_regexp = r'(^|\/){}\.(ttf|woff|otf)$'.format(
+        re.escape(request_font_path))
+    font_path = [
+        font
+        for font in font_list
+        if re.search(font_path_regexp, font)
+    ]
+    if len(font_path) == 0:
+        raise IOError('Font is not found.')
+    return font_path[0]
+
+
 def generate_fontname():
     name = 'JPT-{random_str}'.format(random_str=uuid.uuid4().hex.upper())
     return name

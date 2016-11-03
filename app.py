@@ -1,8 +1,8 @@
 #! python3
 
 import json
-import re
 import zipfile
+from datetime import timezone
 from io import BytesIO
 from logging import getLogger
 from os import environ, path
@@ -11,13 +11,16 @@ from time import time
 from zipfile import ZipFile
 
 import japont
-from flask import Flask, jsonify, make_response, request, send_file
+from Crypto.Hash import SHA512
+from flask import Flask, Response, jsonify, make_response, request, send_file
 from flask_cors import CORS
+from werkzeug.contrib.cache import SimpleCache
 
 # Init
 logger = getLogger(__name__)
 app = Flask(__name__, static_url_path='')
 cors = CORS(app, intercept_exceptions=False, resources={r'/api/*': {}})
+cache = SimpleCache()
 
 
 @app.route('/')
@@ -35,27 +38,66 @@ def get_font_list():
     return response
 
 
+@app.route('/api/fonts/<path:request_font_path>', methods=['GET'])
+def response_font_zip_from_cache(request_font_path):
+    if not request.args.get('hash'):
+        raise ValueError()
+
+    if request.if_modified_since:
+        if_modified_since = \
+            request.if_modified_since.replace(tzinfo=timezone.utc).timestamp()
+
+    if (
+        request.if_modified_since and
+        int(app.config['server_updated_date']) <= int(if_modified_since)
+    ):
+        response = Response()
+        response.status_code = 304
+    else:
+        font_file_path = \
+            japont.search_font_path(request_font_path, app.config['font_list'])
+        hash_key = '{}_{}'.format(
+            font_file_path, request.args.get('hash').lower())
+        if not cache.has(hash_key):
+            raise IOError()
+
+        response = send_file(
+            BytesIO(cache.get(hash_key)),
+            mimetype='application/zip',
+            as_attachment=True,
+            attachment_filename='font.zip')
+
+    response.cache_control.must_revalidate = True
+    response.cache_control.no_cache = True
+    response.cache_control.max_age = 0
+    response.expires = time()
+    response.last_modified = app.config['server_updated_date']
+
+    return response
+
+
 @app.route('/api/fonts/<path:request_font_path>', methods=['POST'])
 def generate_font_zip(request_font_path):
     # valid check
     if not request.data:
         raise ValueError()
 
-    # search font
-    font_path_regexp = \
-        r'(^|\/){}\.(ttf|woff|otf)$'.format(re.escape(request_font_path))
-    font_path = [
-        font
-        for font in app.config['font_list']
-        if re.search(font_path_regexp, font)
-    ]
-    if len(font_path) == 0:
-        raise IOError('Font is not found.')
-
+    font_file_path = \
+        japont.search_font_path(request_font_path, app.config['font_list'])
     request_data = {
-        'file_path': font_path[0],
+        'file_path': font_file_path,
         'text': request.data.decode('utf-8'),
     }
+
+    # Cache
+    hashcalc = SHA512.new()
+    hashcalc.update(request.data)
+    text_hash = hashcalc.hexdigest().lower()
+    hash_key = '{}_{}'.format(request_data['file_path'], text_hash)
+    if cache.has(hash_key):
+        response = Response()
+        response.status_code = 201
+        response.location = request.base_url + '?hash={}'.format(text_hash)
 
     # file
     basefile_path = abspath(
@@ -93,21 +135,20 @@ def generate_font_zip(request_font_path):
         font_info=font_info)
 
     # make zip
-    zip_buff = BytesIO()
-    zip_archive = \
-        ZipFile(zip_buff, mode='w', compression=app.config['zip_compression'])
-    zip_archive.writestr(export_filename, font_bytes)
-    zip_archive.writestr('LICENSE', license)
-    zip_archive.writestr('info.json', json.dumps(font_info))
-    zip_archive.close()
-    zip_buff.seek(0)
+    with BytesIO() as zip_buff:
+        zip_archive = ZipFile(zip_buff, mode='w',
+                              compression=app.config['zip_compression'])
+        zip_archive.writestr(export_filename, font_bytes)
+        zip_archive.writestr('LICENSE', license)
+        zip_archive.writestr('info.json', json.dumps(font_info))
+        zip_archive.close()
+        zip_buff.seek(0)
 
-    response = send_file(
-        zip_buff,
-        mimetype='application/zip',
-        as_attachment=True,
-        attachment_filename='font.zip')
+        cache.set(hash_key, zip_buff.getvalue())
+
+    response = Response()
     response.status_code = 201
+    response.location = request.base_url + '?hash={}'.format(text_hash)
 
     return response
 
@@ -146,8 +187,8 @@ def handle_error(error):
 
 @app.after_request
 def add_x_robots_tag(response):
-    response.headers['X-Robots-Tag'] = \
-        environ.get('X_ROBOTS_TAG', 'noindex, nofollow')
+    response.headers[
+        'X-Robots-Tag'] = environ.get('X_ROBOTS_TAG', 'noindex, nofollow')
     return response
 
 # config
@@ -156,13 +197,13 @@ app.config['root_dir'] = path.dirname(__file__)
 app.config['fonts_dir'] = abspath(path.join(
     app.config['root_dir'], environ.get('FONTS_DIR_PATH', './fonts')))
 app.config['font_list'] = japont.load_font_list(app.config['fonts_dir'])
-app.config['server_updated_date'] = hex(int(time()))[2:]
+app.config['server_updated_date'] = time()
 
 if environ.get('ZIP_COMPRESSION_TYPE', 'ZIP_STORED') in {
     'ZIP_STORED', 'ZIP_DEFLATED', 'ZIP_BZIP2', 'ZIP_LZMA'
 }:
-    app.config['zip_compression'] = \
-        getattr(zipfile, environ.get('ZIP_COMPRESSION_TYPE', 'ZIP_STORED'))
+    app.config['zip_compression'] = getattr(
+        zipfile, environ.get('ZIP_COMPRESSION_TYPE', 'ZIP_STORED'))
 
 if __name__ == '__main__':
     port = int(environ.get('PORT', 8000))
