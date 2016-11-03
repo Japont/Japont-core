@@ -187,8 +187,8 @@ def handle_error(error):
 
 @app.after_request
 def add_x_robots_tag(response):
-    response.headers[
-        'X-Robots-Tag'] = environ.get('X_ROBOTS_TAG', 'noindex, nofollow')
+    response.headers['X-Robots-Tag'] = \
+        environ.get('X_ROBOTS_TAG', 'noindex, nofollow')
     return response
 
 # config
@@ -202,8 +202,8 @@ app.config['server_updated_date'] = time()
 if environ.get('ZIP_COMPRESSION_TYPE', 'ZIP_STORED') in {
     'ZIP_STORED', 'ZIP_DEFLATED', 'ZIP_BZIP2', 'ZIP_LZMA'
 }:
-    app.config['zip_compression'] = getattr(
-        zipfile, environ.get('ZIP_COMPRESSION_TYPE', 'ZIP_STORED'))
+    app.config['zip_compression'] = \
+        getattr(zipfile, environ.get('ZIP_COMPRESSION_TYPE', 'ZIP_STORED'))
 
 if __name__ == '__main__':
     port = int(environ.get('PORT', 8000))
