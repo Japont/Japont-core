@@ -23,7 +23,7 @@
   },
   "buildpacks": [
     {
-      "url": "https://github.com/3846masa/heroku-buildpack-run.git"
+      "url": "https://github.com/Japont/heroku-buildpack-run.git"
     },
     {
       "url": "heroku/python"
